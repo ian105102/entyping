@@ -13,7 +13,6 @@
 #include <Mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 using namespace std;
-
 #include "Page/NormalPage.h"
 #include "Page/PageFront.h"
 #include "Page/PageDirections.h"

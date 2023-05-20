@@ -17,6 +17,7 @@ public:
 		{
 			start = clock();
 			Print(countdown_sec);
+
 			while ((clock() - start) < 1000)
 			{
 				SetWindowsSize(36, 11);
