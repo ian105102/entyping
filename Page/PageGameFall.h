@@ -27,7 +27,7 @@ public:
 		double page_angle = ((rand() % 50) + 20) * 3.1415926 / 180;
 		double page_vx = 3 * (game_difficult + 1) * cos(page_angle), page_vy = 3 * (game_difficult + 1) * sin(page_angle), page_x = 450, page_y = 200;
 		SetWindowsSize(37, 11);
-		
+
 		while (map_char[32] == '\0' && gamefall_score > -998 && gamefall_score < 998)
 		{
 			speed_time = clock();
@@ -103,6 +103,7 @@ public:
 		end(page_x, page_y);
 		return 5;
 	}
+
 private:
 	int gamefall_score = 0;
 	int start_time = 0;
@@ -110,7 +111,8 @@ private:
 	int total = 0;
 	char map_char[34] = {};
 	string gamefall_map[10];
-	void CountDown() {
+	void CountDown()
+	{
 		SetColor(10);
 		gotoxy(0, 0);
 		cout << "------------------------------------" << endl;
@@ -125,7 +127,8 @@ private:
 		cout << "------------------------------------" << endl;
 		Sleep(1000);
 		SetColor(11);
-		gotoxy(0, 0);;
+		gotoxy(0, 0);
+		;
 		cout << "------------------------------------" << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
@@ -251,4 +254,4 @@ private:
 		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << endl;
 	}
 };
-#endif 
+#endif

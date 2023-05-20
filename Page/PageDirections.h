@@ -116,6 +116,7 @@ public:
 		}
 		return -1;
 	}
+
 private:
 	void View(vector<string> button, int button_control, int page, int game_stage)
 	{
@@ -148,7 +149,8 @@ private:
 			}
 		}
 		MyFile.close();
-		gotoxy(0, 0);;
+		gotoxy(0, 0);
+		;
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)
@@ -162,4 +164,4 @@ private:
 		}
 	}
 };
-#endif 
+#endif

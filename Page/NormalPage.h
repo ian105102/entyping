@@ -20,7 +20,7 @@ protected:
 		mousex = mouse.x;
 		mousey = mouse.y;
 		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-		SMALL_RECT rc = { 0, 0, w, h };
+		SMALL_RECT rc = {0, 0, w, h};
 		SetConsoleWindowInfo(hOut, true, &rc);
 	}
 	void PageShake()
@@ -50,8 +50,9 @@ protected:
 			cout << x << " " << y << " " << GetDeviceCaps(hdc, DESKTOPHORZRES) << " " << GetDeviceCaps(hdc, DESKTOPVERTRES);
 		}
 	}
-	void gotoxy(int x, int y) {
-		COORD pos = { x, y };
+	void gotoxy(int x, int y)
+	{
+		COORD pos = {x, y};
 		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleCursorPosition(hOut, pos);
 		return;
@@ -84,4 +85,4 @@ protected:
 		system("cls");
 	}
 };
-#endif 
+#endif

@@ -13,7 +13,7 @@ public:
 	{
 		return difficulty;
 	}
-	int GameStage(int game_stage,int mode)
+	int GameStage(int game_stage, int mode)
 	{
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
@@ -129,40 +129,41 @@ public:
 		}
 		return -1;
 	}
+
 private:
 	int difficulty = 0;
-	void View(vector<string> button, int button_control,int mod)
+	void View(vector<string> button, int button_control, int mod)
 	{
-		string mode_string[] = { "一般(小寫)","一般(大小寫)" ,"一般(文本)" ,"落下模式","倒數模式" };
-		gotoxy(0,0);
+		string mode_string[] = {"一般(小寫)", "一般(大小寫)", "一般(文本)", "落下模式", "倒數模式"};
+		gotoxy(0, 0);
 		string output[11] =
-		{
-			{"------------------------------------"},
-			{"                                    "},
-			{"               難度選擇              "},
-			{"                                    "},
-			{"                                    "},
-			{"                                    "},
-			{"                                    "},
-			{"                                    "},
-			{"                                    "},
-			{"                                    "},
-			{"------------------------------------"},
-		};
+			{
+				{"------------------------------------"},
+				{"                                    "},
+				{"               難度選擇              "},
+				{"                                    "},
+				{"                                    "},
+				{"                                    "},
+				{"                                    "},
+				{"                                    "},
+				{"                                    "},
+				{"                                    "},
+				{"------------------------------------"},
+			};
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)
 				output[i + 5][4 + j] = button[i][j];
 		}
-		output[4] = { "    遊戲模式:" };
+		output[4] = {"    遊戲模式:"};
 		output[4] += mode_string[mod];
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
 			output[button_control + 5][3] = '-';
-		for (int i = 0; i <11; i++)
+		for (int i = 0; i < 11; i++)
 		{
 			cout << output[i] << "\n";
 		}
 		return;
 	}
 };
-#endif 
+#endif

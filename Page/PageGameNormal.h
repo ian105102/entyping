@@ -28,7 +28,8 @@ public:
 		{
 			for (frequency = 1; frequency <= 4 + difficultys; frequency++)
 			{
-				if (gamenormal_score < -950 || gamenormal_score > 950) {
+				if (gamenormal_score < -950 || gamenormal_score > 950)
+				{
 					break;
 				}
 				system("cls");
@@ -52,7 +53,7 @@ public:
 				}
 				Print();
 				while (keyin != 13)
-				{	
+				{
 					SetWindowsSize(37, 10);
 					int clocktime = clock();
 					while (clock() - clocktime <= 500 && keyin != 13)
@@ -78,20 +79,21 @@ public:
 					Print();
 				}
 				keyin = 0;
-				GameScore();			
+				GameScore();
 			}
 		}
 		gamenormal_score -= ((clock() - start_time) / 3000);
 		return 5;
 	}
+
 private:
 	int gamenormal_score = 0;
 	int frequency = 0;
 	int start_time = 0;
 	int difficultys = 0;
 	int mouse_pointer = 0;
-	vector<char> topic0 = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ' };
-	vector<char> topic1 = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ' };
+	vector<char> topic0 = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
+	vector<char> topic1 = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' '};
 	vector<string> topic2 = {};
 	string player_keyin = "\0";
 	string question = "\0";
@@ -199,7 +201,7 @@ private:
 	}
 	void Print()
 	{
-		
+
 		gotoxy(0, 0);
 		cout << "------------------------------------" << endl;
 		cout << frequency << "/" << 4 + difficultys << endl;
@@ -238,16 +240,18 @@ private:
 		}
 		SetColor(7);
 		cout << " \n"
-			<< endl;
+			 << endl;
 		cout << "=>";
 		SetColor(240);
 
-		if (mouse_pointer==1) {
+		if (mouse_pointer == 1)
+		{
 			cout << player_keyin << "|";
 			mouse_pointer = 0;
 		}
 
-		else {
+		else
+		{
 			cout << player_keyin << " ";
 			mouse_pointer = 1;
 		}
@@ -255,7 +259,7 @@ private:
 			cout << ' ';
 		cout << endl;
 		SetColor(7);
-		cout << "score: " << gamenormal_score-((clock() - start_time) / 3000) << "  time: " << (clock() - start_time) / 1000 << endl;
+		cout << "score: " << gamenormal_score - ((clock() - start_time) / 3000) << "  time: " << (clock() - start_time) / 1000 << endl;
 		cout << "------------------------------------" << endl;
 	}
 };

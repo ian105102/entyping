@@ -50,7 +50,7 @@ public:
 			}
 			if (player_mode == 4)
 			{
-				temrank.mode = ("­Ë¼Æ" );
+				temrank.mode = ("­Ë¼Æ");
 			}
 
 			do
@@ -193,6 +193,7 @@ public:
 		}
 		return 0;
 	}
+
 private:
 	struct ranklist
 	{
@@ -209,7 +210,7 @@ private:
 		string s1 = "\0", s2 = "\0";
 		while (RankFilein >> r1 >> s1 >> s2)
 		{
-			rank.push_back({ r1, s1, s2 });
+			rank.push_back({r1, s1, s2});
 		}
 		RankFilein.close();
 		return rank;
@@ -274,4 +275,4 @@ private:
 		}
 	}
 };
-#endif 
+#endif

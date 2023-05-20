@@ -4,7 +4,8 @@
 class PageGameCountdown : NormalPage
 {
 public:
-	int GameCountdownScore() {
+	int GameCountdownScore()
+	{
 		return gamecountdown_score;
 	}
 	int GameStage()
@@ -12,7 +13,7 @@ public:
 		int countdown_sec = 60, start;
 		SetData();
 		Print(countdown_sec);
-		while (countdown_sec > 0)
+		while (countdown_sec > 0 && !(gamecountdown_score < -998 || gamecountdown_score > 998))
 		{
 			start = clock();
 			Print(countdown_sec);
@@ -56,33 +57,34 @@ public:
 		cout << "                                  | " << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);
-		end(450, 200 );
+		end(450, 200);
 		return 5;
 	}
+
 private:
 	int gamecountdown_score = 0;
-	int color_change[35] = { 0 };
+	int color_change[35] = {0};
 	char map_char[18];
-	string game_map[10] = { {"------------------------------------"},
-					 {"                                    "},
-					 {"                                    "},
-					 {"                                    "},
-					 {"                  ↓                 "},
-					 {"                                    "},
-					 {"                                    "},
-					 {"                                    "},
-					 {"                                    "},
-					 {"------------------------------------"} }; 
-	string stop[10] = { {"------------------------------------"},
-						{"                                    "},
-						{"                                    "},
-						{"                                    "},
-						{"                stop                "},
-						{"                                    "},
-						{"         再按一次ESC可以繼續!         "},
-						{"                                    "},
-						{"                                    "},
-						{"------------------------------------"} };
+	string game_map[10] = {{"------------------------------------"},
+						   {"                                    "},
+						   {"                                    "},
+						   {"                                    "},
+						   {"                  ↓                 "},
+						   {"                                    "},
+						   {"                                    "},
+						   {"                                    "},
+						   {"                                    "},
+						   {"------------------------------------"}};
+	string stop[10] = {{"------------------------------------"},
+					   {"                                    "},
+					   {"                                    "},
+					   {"                                    "},
+					   {"                stop                "},
+					   {"                                    "},
+					   {"         再按一次ESC可以繼續!         "},
+					   {"                                    "},
+					   {"                                    "},
+					   {"------------------------------------"}};
 
 	void SetData(void)
 	{
@@ -141,10 +143,12 @@ private:
 				cout << game_map[i] << endl;
 			}
 		}
-		if (countdown_sec < 10) {
+		if (countdown_sec < 10)
+		{
 			SetColor(12);
 		}
-		else {
+		else
+		{
 			SetColor(7);
 		}
 		cout << "還剩 " << countdown_sec << " 秒，score: " << to_string(gamecountdown_score) + " " << endl;
@@ -201,4 +205,4 @@ private:
 		return;
 	}
 };
-#endif 
+#endif
