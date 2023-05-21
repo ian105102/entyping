@@ -151,6 +151,7 @@ private:
 			}
 		}
 		start_time += (clock() - timeresit);
+		system("CLS");
 		Print();
 		return;
 	}
@@ -263,4 +264,4 @@ private:
 		cout << "------------------------------------" << endl;
 	}
 };
-#endif -
+#endif

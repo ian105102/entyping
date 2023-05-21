@@ -158,22 +158,22 @@ private:
 
 	void stop(int sleep)
 	{
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		system("CLS");
 		int timeresit = clock();
-		SetConsoleTextAttribute(hConsole, 9);
+		SetColor(9);
 		gotoxy(0, 0);
 		cout << "------------------------------------" << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "               stop               | " << endl;
-		cout << "          再按一次ESC可以繼續!      | " << endl;
+		cout << "        再按一次ESC可以繼續!      | " << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "------------------------------------" << endl;
 		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << endl;
-		SetConsoleTextAttribute(hConsole, 7);
+		SetColor(7);
 		while (sleep == 1)
 		{
 			int ch = _getch();
@@ -183,6 +183,7 @@ private:
 			}
 		}
 		start_time += (clock() - timeresit);
+		system("CLS");
 		Print();
 	}
 	void ResetGame3()
