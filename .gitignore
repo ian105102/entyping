@@ -1,2 +1,3 @@
 /.vscode/*
-entyping.exe
+*entyping.exe
+*.gitignore
