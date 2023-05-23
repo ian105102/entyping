@@ -21,6 +21,7 @@ public:
 		int tem_mousey = mousey;
 		int button_control = -1;
 		int next = 0;
+		int rank_sit = 0;
 		string player_rank_name = "\0";
 		ranklist temrank = {
 			0,
@@ -28,7 +29,7 @@ public:
 			"\0",
 		};
 		temrank.score = player_score;
-		View(button, next, button_control, rank);
+		View(button, next, button_control, rank_sit, rank, temrank);
 		if (score_mode)
 		{
 
@@ -66,6 +67,14 @@ public:
 						break;
 					}
 				}
+				for (int i = 0; i < rank.size(); i++)
+				{
+					if (rank[i].name == temrank.name)
+					{
+						temrank.name = "\0";
+						cout << "姓名重複" << endl;
+					}
+				}
 			} while (temrank.name == "\0" || temrank.name.size() > 9);
 			int i = 0;
 			while (i < rank.size() && player_score <= rank[i].score)
@@ -74,10 +83,11 @@ public:
 				i++;
 			}
 			rank.insert(rank.begin() + i, temrank);
+			rank_sit = i + 1;
 			OutRankFile(rank);
 		}
 		system("cls");
-		View(button, next, button_control, rank);
+		View(button, next, button_control, rank_sit, rank, temrank);
 		while (game_stage == 5)
 		{
 			SetWindowsSize(37, 11);
@@ -91,22 +101,22 @@ public:
 				if (mousey > 405 && mousey < 430 && button_control != 0)
 				{
 					button_control = 0;
-					View(button, next, button_control, rank);
+					View(button, next, button_control, rank_sit, rank, temrank);
 				}
 				if (mousey > 430 && mousey < 455 && button_control != 1)
 				{
 					button_control = 1;
-					View(button, next, button_control, rank);
+					View(button, next, button_control, rank_sit, rank, temrank);
 				}
 				if (mousey > 455 && mousey < 480 && button_control != 2)
 				{
 					button_control = 2;
-					View(button, next, button_control, rank);
+					View(button, next, button_control, rank_sit, rank, temrank);
 				}
 				if (mousey > 480 && mousey < 505 && button_control != 3)
 				{
 					button_control = 3;
-					View(button, next, button_control, rank);
+					View(button, next, button_control, rank_sit, rank, temrank);
 				}
 			}
 			if (MOUSE_Click(VK_LBUTTON))
@@ -119,7 +129,7 @@ public:
 					if (next >= 1)
 					{
 						next--;
-						View(button, next, button_control, rank);
+						View(button, next, button_control, rank_sit, rank, temrank);
 					}
 				}
 				if (button_control == 1)
@@ -127,7 +137,7 @@ public:
 					if (next < int(rank.size()) - 6)
 					{
 						next++;
-						View(button, next, button_control, rank);
+						View(button, next, button_control, rank_sit, rank, temrank);
 					}
 				}
 				if (button_control == 2)
@@ -150,7 +160,7 @@ public:
 				{
 					button_control++;
 					button_control = button_control % button.size();
-					View(button, next, button_control, rank);
+					View(button, next, button_control, rank_sit, rank, temrank);
 				}
 				if (keyin == 87 || keyin == 119 && button.size() != NULL)
 				{
@@ -160,7 +170,7 @@ public:
 
 						button_control = button.size() - 1;
 					}
-					View(button, next, button_control, rank);
+					View(button, next, button_control, rank_sit, rank, temrank);
 				}
 				if (keyin == 13)
 				{
@@ -169,7 +179,7 @@ public:
 						if (next >= 1)
 						{
 							next--;
-							View(button, next, button_control, rank);
+							View(button, next, button_control, rank_sit, rank, temrank);
 						}
 					}
 					if (button_control == 1)
@@ -177,7 +187,7 @@ public:
 						if (next < int(rank.size()) - 6)
 						{
 							next++;
-							View(button, next, button_control, rank);
+							View(button, next, button_control, rank_sit, rank, temrank);
 						}
 					}
 					if (button_control == 2)
@@ -225,14 +235,14 @@ private:
 		}
 		RankFileout.close();
 	}
-	void View(vector<string> button, int next, int button_control, vector<ranklist> rank)
+	void View(vector<string> button, int next, int button_control, int rank_sit, vector<ranklist> rank, ranklist temrank)
 	{
 		gotoxy(0, 0);
 		string output[11]{
 			{"------------------------------------"},
 			{"               排行榜               "},
-			{"        排名 分數 模式難度 名稱       "},
 			{"                                   "},
+			{"        排名 分數 模式難度 名稱       "},
 			{"                                   "},
 			{"                                   "},
 			{"                                   "},
@@ -248,9 +258,20 @@ private:
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
 			output[button_control + 6][0] = '-';
-
+		if (temrank.name != "\0")
+		{
+			string s = "你的分數:";
+			s += to_string(temrank.score);
+			s += "排名:";
+			s += to_string(rank_sit);
+			for (int i = 0; i < s.size(); i++)
+			{
+				output[2][8 + i] = s[i];
+			}
+		}
 		for (int i = 1; i <= min(int(rank.size()), 6); i++)
 		{
+
 			for (int j = 0; j < to_string(i + next).size(); j++)
 			{
 				output[i + 3][8 + j] = to_string(i + next)[j];
@@ -271,7 +292,19 @@ private:
 		}
 		for (int i = 0; i < 11; i++)
 		{
-			cout << output[i] << "\n";
+			for (int j = 0; j < output[i].size(); j++)
+			{
+				if (rank_sit + 3 == i + next && j > 7 && i > 3 && i < 10)
+				{
+					SetColor(9);
+				}
+				else
+				{
+					SetColor(7);
+				}
+				cout << output[i][j];
+			}
+			cout << endl;
 		}
 	}
 };

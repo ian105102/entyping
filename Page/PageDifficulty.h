@@ -54,7 +54,6 @@ public:
 					View(button, button_control, mode);
 				}
 			}
-
 			if (MOUSE_Click(VK_LBUTTON))
 			{
 				while (MOUSE_Click(VK_LBUTTON) == 1)

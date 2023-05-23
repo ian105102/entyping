@@ -202,7 +202,7 @@ private:
 	}
 	void Print()
 	{
-
+		system("cls");
 		gotoxy(0, 0);
 		cout << "------------------------------------" << endl;
 		cout << frequency << "/" << 4 + difficultys << endl;

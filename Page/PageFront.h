@@ -81,7 +81,6 @@ public:
 					return 6;
 				}
 			}
-
 			if (_kbhit())
 			{
 				mousey_control = 0;

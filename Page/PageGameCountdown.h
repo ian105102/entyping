@@ -11,13 +11,13 @@ public:
 	int GameStage()
 	{
 		int countdown_sec = 60, start;
+		gamecountdown_score = 0;
 		SetData();
 		Print(countdown_sec);
 		while (countdown_sec > 0 && !(gamecountdown_score < -998 || gamecountdown_score > 998))
 		{
 			start = clock();
 			Print(countdown_sec);
-
 			while ((clock() - start) < 1000)
 			{
 				SetWindowsSize(36, 11);
