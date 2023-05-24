@@ -8,7 +8,6 @@ Print()處理頁面輸出
 
 class PageGameFall : NormalPage
 {
-
 public:
 	int GameFallScore()
 	{
@@ -82,8 +81,12 @@ public:
 					{
 						Cheack(ch);
 					}
-					if (sleep == 1)
-						stop(sleep);
+					if (sleep == 1) {
+						if (stop(sleep)) {
+							return 0;
+						}
+					}
+						
 					sleep = 0;
 				}
 			}
@@ -114,50 +117,58 @@ private:
 	string gamefall_map[10];
 	void CountDown()
 	{
-		SetColor(10);
+		int time = clock();
 		gotoxy(0, 0);
-		cout << "------------------------------------" << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                 3                | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "------------------------------------" << endl;
-		Sleep(1000);
-		SetColor(11);
-		gotoxy(0, 0);
-		;
-		cout << "------------------------------------" << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                 2                | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "------------------------------------" << endl;
-		Sleep(1000);
-		SetColor(12);
-		gotoxy(0, 0);
-		cout << "------------------------------------" << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                 1                | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "------------------------------------" << endl;
-		SetColor(7);
-		Sleep(1000);
+			SetColor(11);
+			cout << "------------------------------------" << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                 3                | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "------------------------------------" << endl;
+			SetColor(7);
+			while (clock() - time < 1000) {
+			}
+
+			gotoxy(0, 0);
+			SetColor(11);
+			cout << "------------------------------------" << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                 2                | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "------------------------------------" << endl;
+			SetColor(7);
+			while (clock() - time < 2000) {
+			}
+			gotoxy(0, 0);
+			SetColor(11);
+			cout << "------------------------------------" << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                 1                | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "                                  | " << endl;
+			cout << "------------------------------------" << endl;
+			SetColor(7);
+			while (clock() - time < 3000) {
+				if(_kbhit())
+				 _getch();
+			}
 	}
 
-	void stop(int sleep)
+	int stop(int sleep)
 	{
 		system("CLS");
 		int timeresit = clock();
@@ -169,7 +180,7 @@ private:
 		cout << "                                  | " << endl;
 		cout << "               stop               | " << endl;
 		cout << "        再按一次ESC可以繼續!      | " << endl;
-		cout << "                                  | " << endl;
+		cout << "        按Backspace可以回首頁     | " << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "------------------------------------" << endl;
@@ -180,12 +191,21 @@ private:
 			int ch = _getch();
 			if (ch == 27)
 			{
+				start_time += (clock() - timeresit);
+				system("CLS");
+				Print();
 				sleep = 0;
+				return 0;
+			}
+			if (ch == 8)
+			{
+				start_time += (clock() - timeresit);
+				system("CLS");
+				sleep = 0;
+				return 1;
 			}
 		}
-		start_time += (clock() - timeresit);
-		system("CLS");
-		Print();
+
 	}
 	void ResetGame3()
 	{

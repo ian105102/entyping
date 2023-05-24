@@ -91,7 +91,10 @@ public:
 			int music_time = clock();
 			PlaySound(TEXT("musics/win.wav"), NULL, SND_ASYNC);
 			while (clock()-music_time<5000) {
-				_getch();
+				if (_kbhit()) {
+					_getch();
+				}
+
 			}
 			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 			

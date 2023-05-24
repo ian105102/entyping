@@ -29,7 +29,9 @@ public:
 					ch = _getch();
 					if (ch == 27)
 					{
-						Stop(1);
+						if (Stop(1) == 1) {
+							return 0;
+						}
 					}
 					else if (ch == map_char[8])
 					{
@@ -88,7 +90,7 @@ private:
 					   {"                stop                "},
 					   {"                                    "},
 					   {"         再按一次ESC可以繼續!         "},
-					   {"                                    "},
+					   {"         按Backspace可以回首頁       "},
 					   {"                                    "},
 					   {"------------------------------------"}};
 
@@ -183,7 +185,7 @@ private:
 		}
 		return;
 	}
-	void Stop(int sleep)
+	int Stop(int sleep)
 	{
 		system("cls");
 		SetColor(9);
@@ -204,11 +206,20 @@ private:
 				if (ch == 27)
 				{
 					sleep = 0;
+					system("cls");
+					return 0;
+				}
+				if (ch == 8)
+				{
+
+					sleep = 0;
+					system("cls");
+					return 1;
 				}
 			}
 		}
 		system("cls");
-		return;
+		return 0;
 	}
 };
 #endif

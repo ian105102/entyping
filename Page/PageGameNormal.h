@@ -69,8 +69,12 @@ public:
 							{
 								Cheack(keyin);
 							}
-							if (sleep == 1)
-								Stop(sleep);
+							if (sleep == 1) {
+								if (Stop(sleep)){
+									return 0;
+								}
+							}
+								
 							sleep = 0;
 							clocktime = clock();
 						}
@@ -127,7 +131,7 @@ private:
 		return 1;
 		MyFile.close();
 	}
-	void Stop(int sleep)
+	int Stop(int sleep)
 	{
 		int timeresit = clock();
 		system("cls");
@@ -137,7 +141,7 @@ private:
 		cout << "                                    " << endl;
 		cout << "                stop                " << endl;
 		cout << "          再按一次ESC可以繼續!        " << endl;
-		cout << "                                    " << endl;
+		cout << "          按Backspace可以回首頁      " << endl;
 		cout << "score: " << gamenormal_score << "  time: " << (clock() - start_time) / 1000 << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);
@@ -147,12 +151,20 @@ private:
 			if (ch == 27)
 			{
 				sleep = 0;
+				start_time += (clock() - timeresit);
+				system("CLS");
+				Print();
+				return 0;
+			}
+			if (ch == 8)
+			{
+				sleep = 0;
+				start_time += (clock() - timeresit);
+				system("CLS");
+				return 1;
 			}
 		}
-		start_time += (clock() - timeresit);
-		system("CLS");
-		Print();
-		return;
+
 	}
 	void GameScore()
 	{
