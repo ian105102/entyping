@@ -85,10 +85,19 @@ public:
 			rank.insert(rank.begin() + i, temrank);
 			rank_sit = i + 1;
 			OutRankFile(rank);
-			PlaySound(TEXT("musics/score.wav"), NULL, SND_SYNC);
+			
+			int music_time = clock();
+			PlaySound(TEXT("musics/score.wav"), NULL, SND_ASYNC);
+			while (clock() - music_time < 5000) {
+				if ((clock() - music_time)%30==0) {
+					PageMove(450 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2, 200 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2);
+				}
+				
+			}
+			SetWindowsSize(37, 11);
 			system("cls");
 			View(button, next, button_control, rank_sit, rank, temrank);
-			int music_time = clock();
+			music_time = clock();
 			PlaySound(TEXT("musics/win.wav"), NULL, SND_ASYNC);
 			while (clock()-music_time<5000) {
 				if (_kbhit()) {
