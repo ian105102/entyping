@@ -140,8 +140,8 @@ private:
 		cout << "                                    " << endl;
 		cout << "                                    " << endl;
 		cout << "                stop                " << endl;
-		cout << "          再按一次ESC可以繼續!        " << endl;
-		cout << "          按Backspace可以回首頁      " << endl;
+		cout << "         再按一次ESC可以繼續!         " << endl;
+		cout << "        按Backspace可以回首頁        " << endl;
 		cout << "score: " << gamenormal_score << "  time: " << (clock() - start_time) / 1000 << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);

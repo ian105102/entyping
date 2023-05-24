@@ -41,6 +41,7 @@ int main()
 	bool score_mode = false;
 	int game_stage = 0;
 	srand(time(NULL));
+	
 
 	while (game_end)
 	{
@@ -76,7 +77,7 @@ int main()
 			}
 			if (mode == 4)
 			{
-				game_stage = FifthCountdown.GameStage();
+				game_stage = FifthCountdown.GameStage( );
 				Score = FifthCountdown.GameCountdownScore();
 			}
 			break;
@@ -87,7 +88,8 @@ int main()
 		default:
 			game_end = 0;
 			break;
-		}
+		}		
+
 	}
 	return 0;
 }

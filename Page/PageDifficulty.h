@@ -152,14 +152,35 @@ private:
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)
-				output[i + 5][4 + j] = button[i][j];
+				output[i + 5][16 + j] = button[i][j];
 		}
-		output[4] = {"    遊戲模式:"};
+		output[4] = {"         遊戲模式:"};
 		output[4] += mode_string[mod];
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
-			output[button_control + 5][3] = '-';
+			output[button_control + 5][15] = '-';
 		for (int i = 0; i < 11; i++)
 		{
+			if (i==2) {
+				SetColor(14);
+			}
+			else if (i == 4) {
+				SetColor(7);
+			}
+			else if (i==5) {
+				SetColor(10);
+			}
+			else if (i==6) {
+				SetColor(14);
+			}
+			else if (i == 7) {
+				SetColor(12);
+			}
+			else if (i == 9) {
+				SetColor(15);
+			}
+			else {
+				SetColor(7);
+			}
 			cout << output[i] << "\n";
 		}
 		return;

@@ -305,7 +305,7 @@ private:
 			}
 			for (int j = 0; j < rank[i - 1 + next].mode.size(); j++)
 			{
-				output[i + 3][18 + j] = rank[i - 1 + next].mode[j];
+				output[i + 3][18 + j] = rank[i - 1 + next].mode[j];	
 			}
 			for (int j = 0; j < rank[i - 1 + next].name.size(); j++)
 			{
@@ -316,7 +316,11 @@ private:
 		{
 			for (int j = 0; j < output[i].size(); j++)
 			{
-				if (rank_sit + 3 == i + next && j > 7 && i > 3 && i < 10)
+				if (4 == i + next && j > 7 && i > 3 && i < 10 )
+				{
+					SetColor(236);
+				}
+				else if (rank_sit + 3 == i + next && j > 7 && i > 3 && i < 10)
 				{
 					SetColor(9);
 				}

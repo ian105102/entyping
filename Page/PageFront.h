@@ -29,28 +29,28 @@ public:
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 345 && mousey < 370 && button_control != 0)
+				if (mousey > 370 && mousey < 395 && button_control != 0)
 				{
 					button_control = 0;
 					tem_mousex = mousex;
 					tem_mousey = mousey;
 					View(button, button_control);
 				}
-				if (mousey > 370 && mousey < 395 && button_control != 1)
+				if (mousey > 395 && mousey < 420 && button_control != 1)
 				{
 					button_control = 1;
 					tem_mousex = mousex;
 					tem_mousey = mousey;
 					View(button, button_control);
 				}
-				if (mousey > 395 && mousey < 420 && button_control != 2)
+				if (mousey > 420 && mousey < 445 && button_control != 2)
 				{
 					button_control = 2;
 					tem_mousex = mousex;
 					tem_mousey = mousey;
 					View(button, button_control);
 				}
-				if (mousey > 420 && mousey < 445 && button_control != 3)
+				if (mousey > 470 && mousey < 500 && button_control != 3)
 				{
 					button_control = 3;
 					tem_mousex = mousex;
@@ -130,6 +130,7 @@ private:
 	void View(vector<string> button, int button_control)
 	{
 		gotoxy(0, 0);
+
 		string output[10] =
 			{
 				{"------------------------------------"},
@@ -146,12 +147,13 @@ private:
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)
-				output[i + 4][4 + j] = button[i][j];
+				output[i + 5][1 + j] = button[i][j];
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
-			output[button_control + 4][3] = '-';
+			output[button_control + 5][0] = '-';
 		for (int i = 0; i < 10; i++)
 		{
+			SetColor(7);
 			cout << output[i] << "\n";
 		}
 	}

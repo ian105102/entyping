@@ -179,8 +179,8 @@ private:
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "               stop               | " << endl;
-		cout << "        再按一次ESC可以繼續!      | " << endl;
-		cout << "        按Backspace可以回首頁     | " << endl;
+		cout << "       再按一次ESC可以繼續!       | " << endl;
+		cout << "      按Backspace可以回首頁       | " << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "------------------------------------" << endl;
