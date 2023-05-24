@@ -10,6 +10,7 @@ public:
 	}
 	int GameStage()
 	{
+		PlaySound(NULL, NULL, SND_NODEFAULT);
 		int countdown_sec = 60, start;
 		gamecountdown_score = 0;
 		SetData();
@@ -24,6 +25,7 @@ public:
 				int ch;
 				if (_kbhit())
 				{
+
 					ch = _getch();
 					if (ch == 27)
 					{
@@ -31,15 +33,18 @@ public:
 					}
 					else if (ch == map_char[8])
 					{
+						PlaySound(TEXT("musics/click2.wav"), NULL, SND_ASYNC);
 						gamecountdown_score++;
 						AddData(1);
 					}
 					else
 					{
+						PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 						gamecountdown_score--;
 						AddData(2);
 						PageShake();
 					}
+					
 					Print(countdown_sec);
 				}
 			}

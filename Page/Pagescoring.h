@@ -85,9 +85,19 @@ public:
 			rank.insert(rank.begin() + i, temrank);
 			rank_sit = i + 1;
 			OutRankFile(rank);
+			PlaySound(TEXT("musics/score.wav"), NULL, SND_SYNC);
+			system("cls");
+			View(button, next, button_control, rank_sit, rank, temrank);
+			int music_time = clock();
+			PlaySound(TEXT("musics/win.wav"), NULL, SND_ASYNC);
+			while (clock()-music_time<5000) {
+				_getch();
+			}
+			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
+			
 		}
-		system("cls");
-		View(button, next, button_control, rank_sit, rank, temrank);
+
+
 		while (game_stage == 5)
 		{
 			SetWindowsSize(37, 11);

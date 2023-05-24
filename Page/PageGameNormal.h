@@ -61,7 +61,6 @@ public:
 						if (_kbhit())
 						{
 							keyin = _getch();
-
 							if (keyin == 27)
 							{
 								sleep = 1;

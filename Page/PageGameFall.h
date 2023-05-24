@@ -16,6 +16,7 @@ public:
 	}
 	int GameStage(int game_stage, int game_difficult)
 	{
+		PlaySound(NULL, NULL, SND_NODEFAULT);
 		CountDown();
 		ResetGame3();
 		gamefall_score = 0;
@@ -210,6 +211,7 @@ private:
 	{
 		if (ch == map_char[0])
 		{
+			PlaySound(TEXT("musics/click2.wav"), NULL, SND_ASYNC);
 			gamefall_score++;
 			gamefall_map[pos_x[0]][total - 1] = ' ';
 			total--;
@@ -221,6 +223,7 @@ private:
 		}
 		else
 		{
+			PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 			SetColor(0xC);
 			gamefall_score--;
 		}
