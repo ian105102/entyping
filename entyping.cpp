@@ -13,6 +13,7 @@
 #include <Mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 using namespace std;
+
 #include "Page/NormalPage.h"
 #include "Page/PageFront.h"
 #include "Page/PageDirections.h"
@@ -40,13 +41,15 @@ int main()
 	bool score_mode = false;
 	int game_stage = 0;
 	srand(time(NULL));
-	PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
+	
+
 	while (game_end)
 	{
 		system("CLS");
 		switch (game_stage)
 		{
 		case 0:
+			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 			game_stage = First.GameStage(game_stage);
 			break;
 		case 1:
@@ -74,7 +77,7 @@ int main()
 			}
 			if (mode == 4)
 			{
-				game_stage = FifthCountdown.GameStage();
+				game_stage = FifthCountdown.GameStage( );
 				Score = FifthCountdown.GameCountdownScore();
 			}
 			break;
@@ -85,7 +88,8 @@ int main()
 		default:
 			game_end = 0;
 			break;
-		}
+		}		
+
 	}
 	return 0;
 }
