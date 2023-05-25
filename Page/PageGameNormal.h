@@ -2,6 +2,11 @@
 一般模式遊戲的頁面
 GameStage()處理頁面流程
 Print()處理頁面輸出
+Stop(int sleep) 處理暫停
+ImportTopic() 將題目讀出來
+GameScore() 用於計分
+Cheack(char ch) 判斷打的是否正確
+Print()處理輸出
 */
 #ifndef PAGEGAMENORMAL_H
 #define PAGEGAMENORMAL_H
@@ -55,10 +60,11 @@ public:
 				while (keyin != 13)
 				{
 					SetWindowsSize(37, 10);
+					Print();
 					int clocktime = clock();
-					while (clock() - clocktime <= 500 && keyin != 13)
+					while (clock() - clocktime <= 500 && keyin != 13) // 0.5秒後刷新螢幕
 					{
-						if (_kbhit())
+						if (_kbhit()) // 如果輸入
 						{
 							keyin = _getch();
 							if (keyin == 27)
@@ -69,23 +75,24 @@ public:
 							{
 								Cheack(keyin);
 							}
-							if (sleep == 1) {
-								if (Stop(sleep)){
+							if (sleep == 1)
+							{
+								if (Stop(sleep))
+								{
 									return 0;
 								}
 							}
-								
+
 							sleep = 0;
 							clocktime = clock();
 						}
 					}
-					Print();
 				}
-				keyin = 0;
+				keyin = 0; // 完成一次輸入計分
 				GameScore();
 			}
 		}
-		gamenormal_score -= ((clock() - start_time) / 3000);
+		gamenormal_score -= ((clock() - start_time) / 3000); // 扣出時間
 		return 5;
 	}
 
@@ -142,7 +149,7 @@ private:
 		cout << "                stop                " << endl;
 		cout << "         再按一次ESC可以繼續!         " << endl;
 		cout << "        按Backspace可以回首頁        " << endl;
-		cout << "score: " << gamenormal_score << "  time: " << (clock() - start_time) / 1000 << endl;
+		cout << "score: " << gamenormal_score - ((clock() - start_time) / 3000) << "  time: " << (clock() - start_time) / 1000 << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);
 		while (sleep == 1)
@@ -164,7 +171,6 @@ private:
 				return 1;
 			}
 		}
-
 	}
 	void GameScore()
 	{

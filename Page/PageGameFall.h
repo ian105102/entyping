@@ -2,6 +2,12 @@
 ¸¨¤U¼Ò¦¡¹CÀ¸ªº­¶­±
 GameStage()³B²z­¶­±¬yµ{
 Print()³B²z­¶­±¿é¥X
+CountDown()°µ¶}©l­p®É
+stop(int sleep) ³B²z¼È°±
+ResetGameFall() ¦n¹³¤£¤Ó»Ý­n³o­Ó¡A´N¬O³]©wªì©l­È
+Cheack(int ch) §PÂ_¿é¤J¬O§_¥¿½T
+Move(int x) ²¾°Ê¨Ã·s¼WÃD¥Ø
+Print() ¿é¥X
 */
 #ifndef PAGEGAMEFALL_H
 #define PAGEGAMEFALL_H
@@ -17,7 +23,7 @@ public:
 	{
 		PlaySound(NULL, NULL, SND_NODEFAULT);
 		CountDown();
-		ResetGame3();
+		ResetGameFall();
 		gamefall_score = 0;
 		int speed_time;
 		double speed = 1;
@@ -35,17 +41,17 @@ public:
 			int x = rand() % 7 + 1;
 			int ch;
 
-			Move(x);
-			while (clock() - speed_time <= (500 / speed + 500 / (game_difficult * 2 + 1)) && gamefall_score > -998 && gamefall_score < 998)
+			Move(x);																														// ²¾°Ê¦r¥À
+			while (clock() - speed_time <= (500 / speed + 500 / (game_difficult * 2 + 1)) && gamefall_score > -998 && gamefall_score < 998) // ©T©w®É¶¡²¾°Ê
 			{
 
-				if (clock() - clock_time >= 1000)
+				if (clock() - clock_time >= 1000) // ­p®É¾¹
 				{
 					clock_time = clock();
 					speed = speed + 0.05;
 					Print();
 				}
-				if (clock() - renew_time >= 30 && (clock() - start_time) / 1000 > 30 - game_difficult * 10)
+				if (clock() - renew_time >= 30 && (clock() - start_time) / 1000 > 30 - game_difficult * 10) // ³B²z¤¶­±²¾°Ê
 				{
 					renew_time = clock();
 					page_x += page_vx;
@@ -70,7 +76,7 @@ public:
 					}
 					PageMove(page_x, page_y);
 				}
-				if (_kbhit())
+				if (_kbhit()) // ¿é¤J
 				{
 					ch = _getch();
 					if (ch == 27)
@@ -81,27 +87,29 @@ public:
 					{
 						Cheack(ch);
 					}
-					if (sleep == 1) {
-						if (stop(sleep)) {
+					if (sleep == 1)
+					{
+						if (stop(sleep))
+						{
 							return 0;
 						}
 					}
-						
+
 					sleep = 0;
 				}
 			}
 		}
-		system("cls");
+		system("cls"); // µ²§ô
 		SetColor(9);
 		cout << "------------------------------------" << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                end               | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "                                  ùþ¢i" << endl;
+		cout << "    ùþùþùþùþùþ   ùþùþ    ùþ   ùþùþùþùþ     ùþ  ¢iùþ" << endl;
+		cout << "    ùþ       ùþ ùþ   ùþ   ùþ   ùþ    ùþ  ùþ¢i" << endl;
+		cout << "    ùþùþùþùþùþ   ùþ  ùþ  ùþ   ùþ   ùþ    ùþ  ¢iùþ" << endl;
+		cout << "    ùþ       ùþ   ùþ ùþ   ùþ   ùþ       ùþ¢i" << endl;
+		cout << "    ùþùþùþùþùþ   ùþ    ùþùþ   ùþùþùþùþ     ùþ  ¢iùþ" << endl;
+		cout << "                                  ùþ¢i" << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);
 		end(page_x, page_y);
@@ -119,53 +127,56 @@ private:
 	{
 		int time = clock();
 		gotoxy(0, 0);
-			SetColor(11);
-			cout << "------------------------------------" << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                 3                | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "------------------------------------" << endl;
-			SetColor(7);
-			while (clock() - time < 1000) {
-			}
+		SetColor(11);
+		cout << "------------------------------------" << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "            ùþùþùþùþùþùþùþùþùþ             ùþ¢i" << endl;
+		cout << "                   ùþùþ             ¢iùþ" << endl;
+		cout << "                   ùþùþ             ùþ¢i" << endl;
+		cout << "              ùþùþùþùþùþùþùþ             ¢iùþ" << endl;
+		cout << "                   ùþùþ             ùþ¢i" << endl;
+		cout << "                   ùþùþ             ¢iùþ" << endl;
+		cout << "            ùþùþùþùþùþùþùþùþùþ             ùþ¢i" << endl;
+		cout << "------------------------------------" << endl;
+		SetColor(7);
+		while (clock() - time < 1000)
+		{
+		}
 
-			gotoxy(0, 0);
-			SetColor(11);
-			cout << "------------------------------------" << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                 2                | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "------------------------------------" << endl;
-			SetColor(7);
-			while (clock() - time < 2000) {
-			}
-			gotoxy(0, 0);
-			SetColor(11);
-			cout << "------------------------------------" << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                 1                | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "                                  | " << endl;
-			cout << "------------------------------------" << endl;
-			SetColor(7);
-			while (clock() - time < 3000) {
-				if(_kbhit())
-				 _getch();
-			}
+		gotoxy(0, 0);
+		SetColor(11);
+		cout << "------------------------------------" << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "             ùþùþùþùþùþùþùþùþùþ            ùþ¢i" << endl;
+		cout << "                    ùþùþ            ¢iùþ" << endl;
+		cout << "                    ùþùþ            ùþ¢i" << endl;
+		cout << "             ùþùþùþùþùþùþùþùþùþ            ¢iùþ" << endl;
+		cout << "             ùþùþ                   ùþ¢i" << endl;
+		cout << "             ùþùþ                   ¢iùþ" << endl;
+		cout << "             ùþùþùþùþùþùþùþùþùþ            ùþ¢i" << endl;
+		cout << "------------------------------------" << endl;
+		SetColor(7);
+		while (clock() - time < 2000)
+		{
+		}
+		gotoxy(0, 0);
+		SetColor(11);
+		cout << "------------------------------------" << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "                ùþùþ                ùþ¢i" << endl;
+		cout << "               ùþùþùþ                ¢iùþ" << endl;
+		cout << "                ùþùþ                ùþ¢i" << endl;
+		cout << "                ùþùþ                ¢iùþ" << endl;
+		cout << "                ùþùþ                ùþ¢i" << endl;
+		cout << "                ùþùþ                ¢iùþ" << endl;
+		cout << "              ùþùþùþùþùþùþ              ùþ¢i" << endl;
+		cout << "------------------------------------" << endl;
+		SetColor(7);
+		while (clock() - time < 3000)
+		{
+			if (_kbhit())
+				_getch();
+		}
 	}
 
 	int stop(int sleep)
@@ -175,14 +186,14 @@ private:
 		SetColor(9);
 		gotoxy(0, 0);
 		cout << "------------------------------------" << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "               stop               | " << endl;
-		cout << "       ¦A«ö¤@¦¸ESC¥i¥HÄ~Äò!       | " << endl;
-		cout << "      «öBackspace¥i¥H¦^­º­¶       | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "                                  ùþ¢i" << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "               stop               ùþ¢i" << endl;
+		cout << "       ¦A«ö¤@¦¸ESC¥i¥HÄ~Äò!       ¢iùþ" << endl;
+		cout << "      «öBackspace¥i¥H¦^­º­¶       ùþ¢i" << endl;
+		cout << "                                  ¢iùþ" << endl;
+		cout << "                                  ùþ¢i" << endl;
 		cout << "------------------------------------" << endl;
 		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << endl;
 		SetColor(7);
@@ -205,9 +216,9 @@ private:
 				return 1;
 			}
 		}
-
+		return 0;
 	}
-	void ResetGame3()
+	void ResetGameFall()
 	{
 		for (int i = 0; i < 34; i++)
 		{
@@ -217,14 +228,14 @@ private:
 		total = 0;
 		start_time = clock();
 		gamefall_map[0] = "------------------------------------";
-		gamefall_map[1] = "                                  | ";
-		gamefall_map[2] = "                                  | ";
-		gamefall_map[3] = "                                  | ";
-		gamefall_map[4] = "                                  | ";
-		gamefall_map[5] = "                                  | ";
-		gamefall_map[6] = "                                  | ";
-		gamefall_map[7] = "                                  | ";
-		gamefall_map[8] = "                                  | ";
+		gamefall_map[1] = "                                  ¢iùþ";
+		gamefall_map[2] = "                                  ùþ¢i";
+		gamefall_map[3] = "                                  ¢iùþ";
+		gamefall_map[4] = "                                  ùþ¢i";
+		gamefall_map[5] = "                                  ¢iùþ";
+		gamefall_map[6] = "                                  ùþ¢i";
+		gamefall_map[7] = "                                  ¢iùþ";
+		gamefall_map[8] = "                                  ùþ¢i";
 		gamefall_map[9] = "------------------------------------";
 	}
 	void Cheack(int ch)

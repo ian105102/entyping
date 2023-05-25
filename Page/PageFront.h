@@ -10,8 +10,9 @@ class PageFront : NormalPage
 public:
 	int GameStage(int gamestage)
 	{
+		SetWindowsSize(37, 11);
 		vector<string> button;
-		int button_control = -1;
+		int button_control = 0;
 		button.push_back("開始");
 		button.push_back("介紹");
 		button.push_back("排行榜");
@@ -19,7 +20,8 @@ public:
 		View(button, button_control);
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
-		mousey_control = 1;
+		mousey_control = 0;
+		int i = 0;
 		while (gamestage == 0)
 		{
 			SetWindowsSize(37, 11);
@@ -81,26 +83,39 @@ public:
 					return 6;
 				}
 			}
+
 			if (_kbhit())
 			{
+				int keyin = _getch();
+				if (keyin == 224)
+				{
+					keyin = _getch();
+				}
 				mousey_control = 0;
 				tem_mousex = mousex;
 				tem_mousey = mousey;
-				int keyin = _getch();
-				if (keyin == 83 || keyin == 115 && button.size() != NULL)
+				if (button_control == -1 && keyin != 13)
 				{
-					button_control++;
-					button_control = button_control % button.size();
+					button_control = 0;
 					View(button, button_control);
 				}
-				if (keyin == 87 || keyin == 119 && button.size() != NULL)
+				else
 				{
-					button_control--;
-					if (button_control < 0)
+					if ((keyin == 83 || keyin == 115 || keyin == 80) && button.size() != NULL)
 					{
-						button_control = button.size() - 1;
+						button_control++;
+						button_control = button_control % button.size();
+						View(button, button_control);
 					}
-					View(button, button_control);
+					if ((keyin == 87 || keyin == 119 || keyin == 72) && button.size() != NULL)
+					{
+						button_control--;
+						if (button_control < 0)
+						{
+							button_control = button.size() - 1;
+						}
+						View(button, button_control);
+					}
 				}
 				if (keyin == 13)
 				{
@@ -135,22 +150,22 @@ private:
 			{
 				{"------------------------------------"},
 				{"                                   "},
-				{"            英文打字練習             "},
-				{"                                   "},
-				{"               +-----+ +-----+     "},
-				{"              /|  a  |/|  d  |     "},
-				{"              ||     |||     |     "},
-				{"              |/-----/|/-----/     "},
-				{"              +-----+ +-----+      "},
+				{"            英文打字練習            "},
+				{"               +-----+             "},
+				{"              /|  a  | +-----+     "},
+				{"             + |     |/|  s  |     "},
+				{"             | /-----/||     |     "},
+				{"             |/     / |/-----/     "},
+				{"             +-----+  +-----+      "},
 				{"------------------------------------"},
 			};
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)
-				output[i + 5][1 + j] = button[i][j];
+				output[i + 5][2 + j] = button[i][j];
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
-			output[button_control + 5][0] = '-';
+			output[button_control + 5][1] = '-';
 		for (int i = 0; i < 10; i++)
 		{
 			SetColor(7);

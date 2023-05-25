@@ -48,6 +48,7 @@ int main()
 		switch (game_stage)
 		{
 		case 0:
+			score_mode = 0;
 			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 			game_stage = First.GameStage(game_stage);
 			break;

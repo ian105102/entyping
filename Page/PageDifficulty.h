@@ -15,9 +15,11 @@ public:
 	}
 	int GameStage(int game_stage, int mode)
 	{
+		SetWindowsSize(37, 11);
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
-		int button_control = -1;
+		int button_control = 0;
+		mousey_control = 0;
 		vector<string> button;
 		button.push_back("0Â²³æ");
 		button.push_back("1¤@¯ë");
@@ -26,7 +28,7 @@ public:
 		View(button, button_control, mode);
 		while (game_stage == 3)
 		{
-			SetWindowsSize(37, 11);
+			SetWindowsSize(37, 10);
 			if (mousey != tem_mousey && mousex != tem_mousex)
 			{
 				mousey_control = 1;
@@ -82,24 +84,36 @@ public:
 
 			if (_kbhit())
 			{
+				int keyin = _getch();
+				if (keyin == 224)
+				{
+					keyin = _getch();
+				}
 				mousey_control = 0;
 				tem_mousex = mousex;
 				tem_mousey = mousey;
-				int keyin = _getch();
-				if (keyin == 83 || keyin == 115 && button.size() != NULL)
+				if (button_control == -1 && keyin != 13)
 				{
-					button_control++;
-					button_control = button_control % button.size();
+					button_control = 0;
 					View(button, button_control, mode);
 				}
-				if (keyin == 87 || keyin == 119 && button.size() != NULL)
+				else
 				{
-					button_control--;
-					if (button_control < 0)
+					if ((keyin == 83 || keyin == 115 || keyin == 80) && button.size() != NULL)
 					{
-						button_control = button.size() - 1;
+						button_control++;
+						button_control = button_control % button.size();
+						View(button, button_control, mode);
 					}
-					View(button, button_control, mode);
+					if ((keyin == 87 || keyin == 119 || keyin == 72) && button.size() != NULL)
+					{
+						button_control--;
+						if (button_control < 0)
+						{
+							button_control = button.size() - 1;
+						}
+						View(button, button_control, mode);
+					}
 				}
 
 				if (keyin == 13)
@@ -160,25 +174,32 @@ private:
 			output[button_control + 5][15] = '-';
 		for (int i = 0; i < 11; i++)
 		{
-			if (i==2) {
+			if (i == 2)
+			{
 				SetColor(14);
 			}
-			else if (i == 4) {
+			else if (i == 4)
+			{
 				SetColor(7);
 			}
-			else if (i==5) {
+			else if (i == 5)
+			{
 				SetColor(10);
 			}
-			else if (i==6) {
+			else if (i == 6)
+			{
 				SetColor(14);
 			}
-			else if (i == 7) {
+			else if (i == 7)
+			{
 				SetColor(12);
 			}
-			else if (i == 9) {
+			else if (i == 9)
+			{
 				SetColor(15);
 			}
-			else {
+			else
+			{
 				SetColor(7);
 			}
 			cout << output[i] << "\n";

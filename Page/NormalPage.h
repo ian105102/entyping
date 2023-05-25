@@ -1,7 +1,18 @@
 
 /*
 共通成員函式、成員變數位置
-SetWindowsSize(w,h) 處理視窗位置與大小
+
+mousey
+mousex
+為滑鼠xy位置
+resetmousesit() 將刷新滑鼠位置至mousex、mousey
+SetWindowsSize(int w,int h) 處理視窗位置與大小
+PageShake()頁面跳動
+PageMove()給定xy固定頁面位置
+printsit()用於測試，放在View()、Print()裡可以輸出滑鼠位置以及螢幕最大位置
+gotoxy(x, y)將dos介面光標移到xy，移到00可以直接覆蓋前面文字
+SetColor(int color)輸入色碼後改變顏色
+end(int page_x, int page_y)輸入頁面的xy做出頁面落下的效果
 */
 #ifndef NORMALPAGE_H
 #define NORMALPAGE_H
@@ -11,14 +22,21 @@ class NormalPage
 protected:
 	int mousex;
 	int mousey;
-	int mousey_control = 1;
-	void SetWindowsSize(int w, int h)
+	int mousey_control = 0;
+	void resetmousesit()
 	{
-		SetWindowPos(GetConsoleWindow(), HWND_TOP, 450, 200, 0, 0, SWP_NOSIZE);
 		POINT mouse;
 		GetCursorPos(&mouse);
 		mousex = mouse.x;
 		mousey = mouse.y;
+	}
+	void SetWindowsSize(int w, int h)
+	{
+		POINT mouse;
+		GetCursorPos(&mouse);
+		mousex = mouse.x;
+		mousey = mouse.y;
+		SetWindowPos(GetConsoleWindow(), HWND_TOP, 450, 200, 0, 0, SWP_NOSIZE);
 		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		SMALL_RECT rc = {0, 0, w, h};
 		SetConsoleWindowInfo(hOut, true, &rc);

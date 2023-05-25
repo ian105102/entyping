@@ -1,4 +1,10 @@
-#pragma once
+/*
+ GameStage() ­¶­±¥D¬yµ{
+ SetData() ³]©wªì©l­È
+ AddData(int RoW) ±À¸ê®Æ
+ Stop(int sleep)³B²z¼È°±
+  Print(int countdown_sec) ³B²z¿é¥X
+*/
 #ifndef PAGEGAMERECOUNTDOWN_H
 #define PAGEGAMERECOUNTDOWN_H
 class PageGameCountdown : NormalPage
@@ -29,7 +35,8 @@ public:
 					ch = _getch();
 					if (ch == 27)
 					{
-						if (Stop(1) == 1) {
+						if (Stop(1) == 1)
+						{
 							return 0;
 						}
 					}
@@ -37,16 +44,16 @@ public:
 					{
 						PlaySound(TEXT("musics/click2.wav"), NULL, SND_ASYNC);
 						gamecountdown_score++;
-						AddData(1);
+						AddData(1, countdown_sec);
 					}
 					else
 					{
 						PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 						gamecountdown_score--;
-						AddData(2);
+						AddData(2, countdown_sec);
 						PageShake();
 					}
-					
+
 					Print(countdown_sec);
 				}
 			}
@@ -57,11 +64,11 @@ public:
 		cout << "------------------------------------" << endl;
 		cout << "                                  | " << endl;
 		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                end               | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
-		cout << "                                  | " << endl;
+		cout << "    ùþùþùþùþùþ   ùþùþ    ùþ   ùþùþùþùþ     ùþ  | " << endl;
+		cout << "    ùþ       ùþ ùþ   ùþ   ùþ   ùþ    ùþ  | " << endl;
+		cout << "    ùþùþùþùþùþ   ùþ  ùþ  ùþ   ùþ   ùþ    ùþ  | " << endl;
+		cout << "    ùþ       ùþ   ùþ ùþ   ùþ   ùþ       | " << endl;
+		cout << "    ùþùþùþùþùþ   ùþ    ùþùþ   ùþùþùþùþ     ùþ  | " << endl;
 		cout << "                                  | " << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);
@@ -94,7 +101,7 @@ private:
 					   {"                                    "},
 					   {"------------------------------------"}};
 
-	void SetData(void)
+	void SetData()
 	{
 		for (int i = 0; i < 18; i++)
 		{
@@ -104,8 +111,7 @@ private:
 			}
 			else
 			{
-				int r = (rand() % 26) + 97;
-				map_char[i] = r;
+				map_char[i] = (char)(rand() % 26) + 97;
 			}
 		}
 		int j = 0;
@@ -116,69 +122,46 @@ private:
 		}
 		return;
 	}
-
-	void Print(int countdown_sec)
-	{
-		gotoxy(0, 0);
-		for (int i = 0; i < 10; i++)
-		{
-			if (i == 5)
-			{
-				for (int j = 0; j < 36; j++)
-				{
-					if (j > 18)
-					{
-						if (color_change[j] == 1)
-						{
-							SetColor(2);
-						}
-						else if (color_change[j] == 2)
-						{
-							SetColor(12);
-						}
-						cout << game_map[i][j];
-					}
-					else
-					{
-						SetColor(7);
-						cout << game_map[i][j];
-					}
-				}
-				SetColor(7);
-			}
-			else
-			{
-				cout << game_map[i] << endl;
-			}
-		}
-		if (countdown_sec < 10)
-		{
-			SetColor(12);
-		}
-		else
-		{
-			SetColor(7);
-		}
-		cout << "ÁÙ³Ñ " << countdown_sec << " ¬í¡Ascore: " << to_string(gamecountdown_score) + " " << endl;
-		SetColor(7);
-		return;
-	}
-	void AddData(int RoW)
+	void AddData(int RoW, int countdown_sec)
 	{
 		color_change[18] = RoW;
 		int y = 34;
-		for (int i = 0; i < 17; i++)
+		for (int i = 0; i <= 17; i++) // ±À°Ê¦r¤¸
 		{
+			for (int j = 1; j <= 8; j++)
+			{
+				if (j != 5 && j != 4)
+				{
+					game_map[j][36 - (i * 2)] = game_map[j][34 - (i * 2)];
+				}
+			}
 			map_char[i] = map_char[i + 1];
-			color_change[y] = color_change[y - 2];
+			color_change[y] = color_change[y - 2]; // ±À°ÊÃC¦â
 			y -= 2;
 		}
-		int R = (rand() % 26) + 97;
-		map_char[17] = R;
+		for (int i = 1; i <= 8; i++)
+		{
+			if (countdown_sec < 30)
+			{
+				int num = rand();
+				if (i != 5 && i != 4 && num % 5 == 1)
+				{
+					game_map[i][0] = '<';
+				}
+				else if (i != 5 && i != 4 && num % 5 == 2)
+				{
+					game_map[i][0] = '>';
+				}
+				else
+				{
+					game_map[i][0] = ' ';
+				}
+			}
+		}
+		map_char[17] = (char)(rand() % 26) + 97;
 		color_change[0] = 0;
-
 		int j = 0;
-		for (int i = 34; i >= 0; i -= 2)
+		for (int i = 34; i >= 0; i -= 2) // ±N¸ê®Æ¶K¨ìmap¸Ì
 		{
 			game_map[5][i] = map_char[j];
 			j++;
@@ -220,6 +203,53 @@ private:
 		}
 		system("cls");
 		return 0;
+	}
+	void Print(int countdown_sec)
+	{
+		gotoxy(0, 0);
+		for (int i = 0; i < 10; i++)
+		{
+			if (i == 5)
+			{
+				for (int j = 0; j < 36; j++)
+				{
+					if (j > 18)
+					{
+						if (color_change[j] == 1)
+						{
+							SetColor(2);
+						}
+						else if (color_change[j] == 2)
+						{
+							SetColor(12);
+						}
+						cout << game_map[i][j];
+					}
+					else
+					{
+						SetColor(7);
+						cout << game_map[i][j];
+					}
+				}
+				cout << endl;
+				SetColor(7);
+			}
+			else
+			{
+				cout << game_map[i] << endl;
+			}
+		}
+		if (countdown_sec < 10)
+		{
+			SetColor(12);
+		}
+		else
+		{
+			SetColor(7);
+		}
+		cout << "ÁÙ³Ñ " << countdown_sec << " ¬í¡Ascore: " << to_string(gamecountdown_score) + " " << endl;
+		SetColor(7);
+		return;
 	}
 };
 #endif
