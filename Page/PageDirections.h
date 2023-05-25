@@ -160,6 +160,12 @@ private:
 			output[button_control + 8][page][3] = '-';
 		for (int i = 0; i < 12; i++)
 		{
+			if (i==1) {
+				SetColor(14);
+			}
+			else {
+				SetColor(7);
+			}
 			cout << output[i][page] << endl;
 		}
 	}

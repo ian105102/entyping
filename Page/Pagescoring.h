@@ -316,7 +316,10 @@ private:
 		{
 			for (int j = 0; j < output[i].size(); j++)
 			{
-				if (4 == i + next && j > 7 && i > 3 && i < 10 )
+				if (i==3 && j > 7 && j<35) {
+					SetColor(112);
+				}
+				else if (4 == i + next && j > 7 && i > 3 && i < 10 )
 				{
 					SetColor(236);
 				}
