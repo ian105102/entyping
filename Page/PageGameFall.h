@@ -34,7 +34,7 @@ public:
 		double page_vx = 3 * (game_difficult + 1) * cos(page_angle), page_vy = 3 * (game_difficult + 1) * sin(page_angle), page_x = 450, page_y = 200;
 		SetWindowsSize(37, 11);
 
-		while (map_char[32] == '\0' && gamefall_score > -998 && gamefall_score < 998)
+		while (map_char[33] == '\0' && gamefall_score > -998 && gamefall_score < 998)
 		{
 			speed_time = clock();
 			int sleep = 0;
@@ -127,7 +127,8 @@ private:
 	{
 		int time = clock();
 		gotoxy(0, 0);
-		SetColor(11);
+		SetColor(12);
+		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		cout << "------------------------------------" << endl;
 		cout << "                                  ¢iùþ" << endl;
 		cout << "            ùþùþùþùþùþùþùþùþùþ             ùþ¢i" << endl;
@@ -142,9 +143,9 @@ private:
 		while (clock() - time < 1000)
 		{
 		}
-
+		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		gotoxy(0, 0);
-		SetColor(11);
+		SetColor(12);
 		cout << "------------------------------------" << endl;
 		cout << "                                  ¢iùþ" << endl;
 		cout << "             ùþùþùþùþùþùþùþùþùþ            ùþ¢i" << endl;
@@ -159,8 +160,9 @@ private:
 		while (clock() - time < 2000)
 		{
 		}
+		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		gotoxy(0, 0);
-		SetColor(11);
+		SetColor(10);
 		cout << "------------------------------------" << endl;
 		cout << "                                  ¢iùþ" << endl;
 		cout << "                ùþùþ                ùþ¢i" << endl;
@@ -177,6 +179,7 @@ private:
 			if (_kbhit())
 				_getch();
 		}
+		PlaySound(TEXT("musics/di1.wav"), NULL, SND_ASYNC);
 	}
 
 	int stop(int sleep)

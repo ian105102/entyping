@@ -19,6 +19,17 @@ public:
 		PlaySound(NULL, NULL, SND_NODEFAULT);
 		int countdown_sec = 60, start;
 		gamecountdown_score = 0;
+		game_map[0] = {"------------------------------------"};
+		game_map[1] = {"                                    "};
+		game_map[2] = {"                                    "};
+		game_map[3] = {"===================================="};
+		game_map[4] = {"                  ¡õ                 "};
+		game_map[5] = {"                                    "};
+		game_map[6] = {"===================================="};
+		game_map[7] = {"                                    "};
+		game_map[8] = {"                                    "};
+		game_map[9] = {"------------------------------------"};
+		CountDown();
 		SetData();
 		Print(countdown_sec);
 		while (countdown_sec > 0 && !(gamecountdown_score < -998 || gamecountdown_score > 998))
@@ -181,6 +192,65 @@ private:
 		}
 		return;
 	}
+	void CountDown()
+	{
+		int time = clock();
+		gotoxy(0, 0);
+		SetColor(12);
+		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
+		cout << "------------------------------------" << endl;
+		cout << "                                    " << endl;
+		cout << "            ùþùþùþùþùþùþùþùþùþ               " << endl;
+		cout << "                   ùþùþ               " << endl;
+		cout << "                   ùþùþ               " << endl;
+		cout << "              ùþùþùþùþùþùþùþ               " << endl;
+		cout << "                   ùþùþ               " << endl;
+		cout << "                   ùþùþ               " << endl;
+		cout << "            ùþùþùþùþùþùþùþùþùþ               " << endl;
+		cout << "------------------------------------" << endl;
+		SetColor(7);
+		while (clock() - time < 1000)
+		{
+		}
+		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
+		gotoxy(0, 0);
+		SetColor(12);
+		cout << "------------------------------------" << endl;
+		cout << "                                    " << endl;
+		cout << "             ùþùþùþùþùþùþùþùþùþ              " << endl;
+		cout << "                    ùþùþ              " << endl;
+		cout << "                    ùþùþ              " << endl;
+		cout << "             ùþùþùþùþùþùþùþùþùþ              " << endl;
+		cout << "             ùþùþ                     " << endl;
+		cout << "             ùþùþ                     " << endl;
+		cout << "             ùþùþùþùþùþùþùþùþùþ              " << endl;
+		cout << "------------------------------------" << endl;
+		SetColor(7);
+		while (clock() - time < 2000)
+		{
+		}
+		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
+		gotoxy(0, 0);
+		SetColor(10);
+		cout << "------------------------------------" << endl;
+		cout << "                                    " << endl;
+		cout << "                ùþùþ                  " << endl;
+		cout << "               ùþùþùþ                  " << endl;
+		cout << "                ùþùþ                  " << endl;
+		cout << "                ùþùþ                  " << endl;
+		cout << "                ùþùþ                  " << endl;
+		cout << "                ùþùþ                  " << endl;
+		cout << "              ùþùþùþùþùþùþ                " << endl;
+		cout << "------------------------------------" << endl;
+		SetColor(7);
+		while (clock() - time < 3000)
+		{
+			if (_kbhit())
+				_getch();
+		}
+		PlaySound(TEXT("musics/di1.wav"), NULL, SND_ASYNC);
+	}
+
 	int Stop(int sleep)
 	{
 		system("cls");

@@ -95,7 +95,7 @@ public:
 				if (button_control == 0)
 				{
 					page++;
-					page = page % page_num;
+					page = page % (page_num + 1);
 					button_control = 0;
 					system("cls");
 					View(button, button_control, page, game_stage, output);
@@ -151,7 +151,7 @@ public:
 						button_control = 0;
 						mousey_control = 0;
 						page++;
-						page = page % page_num;
+						page = page % (page_num + 1);
 						system("cls");
 						View(button, button_control, page, game_stage, output);
 					}

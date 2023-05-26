@@ -35,6 +35,7 @@ public:
 		View(button, next, button_control, rank_sit, rank, temrank);
 		if (score_mode) // 處理排名資料
 		{
+			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 			switch (player_mode)
 			{
 			case 0:
@@ -60,12 +61,18 @@ public:
 			{
 				cout << "輸入名稱: ";
 				getline(cin, temrank.name);
+				if (temrank.name.size() > 7)
+				{
+					cout << "最多七個字" << endl;
+					temrank.name = "\0";
+					continue;
+				}
 				for (int i = 0; i < temrank.name.size(); i++)
 				{
-					if ((temrank.name[i] < 'a' || temrank.name[i] > 'z') && (temrank.name[i] < 'A' || temrank.name[i] > 'Z') && temrank.name[i] != '?' && temrank.name[i] != '.')
+					if ((temrank.name[i] < 'a' || temrank.name[i] > 'z') && (temrank.name[i] < 'A' || temrank.name[i] > 'Z') && (temrank.name[i] < '0' || temrank.name[i] > '9') && temrank.name[i] != '?' && temrank.name[i] != '.')
 					{
 						temrank.name = "\0";
-						cout << "只能是英文，只開放?.特殊符號" << endl;
+						cout << "只能英文數字，只開放?和.特殊符號" << endl;
 						break;
 					}
 				}
@@ -77,7 +84,7 @@ public:
 						cout << "姓名重複" << endl;
 					}
 				}
-			} while (temrank.name == "\0" || temrank.name.size() > 9);
+			} while (temrank.name == "\0");
 			int i = 0;
 			while (i < rank.size() && player_score <= rank[i].score)
 			{
@@ -99,6 +106,19 @@ public:
 			}
 			SetWindowsSize(37, 11);
 			system("cls");
+			if (rank_sit - 1 < 6)
+			{
+				next = 0;
+			}
+			else if (rank_sit + 5 > rank.size())
+			{
+				next = rank.size() - 6;
+			}
+			else
+			{
+				next = rank_sit - 1;
+			}
+
 			View(button, next, button_control, rank_sit, rank, temrank);
 			music_time = clock();
 			PlaySound(TEXT("musics/win.wav"), NULL, SND_ASYNC);
@@ -111,7 +131,6 @@ public:
 			}
 			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 		}
-
 		while (game_stage == 5)
 		{
 			SetWindowsSize(37, 11);
@@ -334,9 +353,17 @@ private:
 				{
 					SetColor(112);
 				}
-				else if (4 == i + next && j > 7 && i > 3 && i < 10)
+				else if (4 == i + next && j > 7 && i > 3 && i < 10 && rank.size() > 0)
 				{
 					SetColor(236);
+				}
+				else if (5 == i + next && j > 7 && i > 3 && i < 10 && rank.size() > 1)
+				{
+					SetColor(156);
+				}
+				else if (6 == i + next && j > 7 && i > 3 && i < 10 && rank.size() > 2)
+				{
+					SetColor(172);
 				}
 				else if (rank_sit + 3 == i + next && j > 7 && i > 3 && i < 10)
 				{
