@@ -35,8 +35,7 @@ public:
 					ch = _getch();
 					if (ch == 27)
 					{
-						if (Stop(1) == 1)
-						{
+						if (Stop(1) == 1) {
 							return 0;
 						}
 					}
@@ -78,19 +77,19 @@ public:
 
 private:
 	int gamecountdown_score = 0;
-	int color_change[35] = {0};
+	int color_change[35] = { 0 };
 	char map_char[18];
-	string game_map[10] = {{"------------------------------------"},
+	string game_map[10] = { {"------------------------------------"},
 						   {"                                    "},
 						   {"                                    "},
-						   {"                                    "},
+						   {"===================================="},
 						   {"                  ↓                 "},
 						   {"                                    "},
+						   {"===================================="},
 						   {"                                    "},
 						   {"                                    "},
-						   {"                                    "},
-						   {"------------------------------------"}};
-	string stop[10] = {{"------------------------------------"},
+						   {"------------------------------------"} };
+	string stop[10] = { {"------------------------------------"},
 					   {"                                    "},
 					   {"                                    "},
 					   {"                                    "},
@@ -99,8 +98,8 @@ private:
 					   {"        再按一次ESC可以繼續!          "},
 					   {"       按Backspace可以回首頁        "},
 					   {"                                    "},
-					   {"------------------------------------"}};
-
+					   {"------------------------------------"} };
+	string s[9] = { "\0" };
 	void SetData()
 	{
 		for (int i = 0; i < 18; i++)
@@ -126,42 +125,47 @@ private:
 	{
 		color_change[18] = RoW;
 		int y = 34;
-		for (int i = 0; i <= 17; i++) // 推動字元
+		for (int i = 0; i <= 17; i++)       //推動字元
 		{
-			for (int j = 1; j <= 8; j++)
-			{
-				if (j != 5 && j != 4)
-				{
+			for (int j = 1; j <= 8; j++) {
+				if (j < 3 || j > 6 ) {
 					game_map[j][36 - (i * 2)] = game_map[j][34 - (i * 2)];
 				}
 			}
 			map_char[i] = map_char[i + 1];
-			color_change[y] = color_change[y - 2]; // 推動顏色
+			color_change[y] = color_change[y - 2];   //推動顏色
 			y -= 2;
 		}
-		for (int i = 1; i <= 8; i++)
-		{
-			if (countdown_sec < 30)
-			{
-				int num = rand();
-				if (i != 5 && i != 4 && num % 5 == 1)
-				{
-					game_map[i][0] = '<';
+		
+		
+		for (int i = 1; i <= 8; i++) {
+			if (countdown_sec<30) {
+				if ((i <3 || i > 6) && rand() % 25 == 0 && s[i].size() == 0 ) {
+					int num = rand() % 3;
+					if (num == 0) {
+						s[i] = "     Hurry up!";
+					}
+					else if (num == 1) {
+						s[i] = "    HO NO!";
+					}
+					else if (num == 2) {
+						s[i] = "    Eazy!";
+					}
 				}
-				else if (i != 5 && i != 4 && num % 5 == 2)
-				{
-					game_map[i][0] = '>';
+				if ((i < 3 || i > 6) && s[i].size() >0) {
+					game_map[i][0] = s[i][s[i].size()-1];
+					s[i].pop_back();
 				}
-				else
-				{
+				else if (i < 3 || i > 6){
 					game_map[i][0] = ' ';
 				}
 			}
+
 		}
 		map_char[17] = (char)(rand() % 26) + 97;
 		color_change[0] = 0;
 		int j = 0;
-		for (int i = 34; i >= 0; i -= 2) // 將資料貼到map裡
+		for (int i = 34; i >= 0; i -= 2)         //將資料貼到map裡
 		{
 			game_map[5][i] = map_char[j];
 			j++;
@@ -231,11 +235,17 @@ private:
 						cout << game_map[i][j];
 					}
 				}
+
 				cout << endl;
-				SetColor(7);
 			}
 			else
 			{
+				if (((i < 3 && i > 0) || (i > 6 && i < 9))) {
+					SetColor(4);
+				}
+				else {
+					SetColor(7);;
+				}
 				cout << game_map[i] << endl;
 			}
 		}
@@ -251,5 +261,6 @@ private:
 		SetColor(7);
 		return;
 	}
+
 };
 #endif

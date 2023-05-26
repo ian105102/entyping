@@ -33,10 +33,9 @@ public:
 		};
 		temrank.score = player_score;
 		View(button, next, button_control, rank_sit, rank, temrank);
-		if (score_mode) // 處理排名資料
+		if (score_mode)							//處理排名資料
 		{
-			switch (player_mode)
-			{
+			switch (player_mode) {
 			case 0:
 				temrank.mode = ("小寫" + to_string(gmae_difficulty));
 				break;
@@ -87,13 +86,11 @@ public:
 			rank.insert(rank.begin() + i, temrank);
 			rank_sit = i + 1;
 			OutRankFile(rank);
-
+			
 			int music_time = clock();
 			PlaySound(TEXT("musics/score.wav"), NULL, SND_ASYNC);
-			while (clock() - music_time < 5000)
-			{
-				if ((clock() - music_time) % 30 == 0)
-				{
+			while (clock() - music_time < 5000) {
+				if ((clock() - music_time)%30==0) {
 					PageMove(450 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2, 200 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2);
 				}
 			}
@@ -102,15 +99,16 @@ public:
 			View(button, next, button_control, rank_sit, rank, temrank);
 			music_time = clock();
 			PlaySound(TEXT("musics/win.wav"), NULL, SND_ASYNC);
-			while (clock() - music_time < 5000)
-			{ // 修正停止時依然可以累計輸入的問題
-				if (_kbhit())
-				{
+			while (clock()-music_time<5000) {                            //修正停止時依然可以累計輸入的問題
+				if (_kbhit()) {
 					_getch();
 				}
+
 			}
-			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
+			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);  
+			
 		}
+
 
 		while (game_stage == 5)
 		{
@@ -176,8 +174,7 @@ public:
 			if (_kbhit())
 			{
 				int keyin = _getch();
-				if (keyin == 224)
-				{
+				if (keyin == 224) {
 					keyin = _getch();
 				}
 				mousey_control = 0;
@@ -286,14 +283,14 @@ private:
 			{"                                   "},
 			{"------------------------------------"},
 		};
-		for (int i = 0; i < button.size(); i++) // 按鈕寫入string
+		for (int i = 0; i < button.size(); i++)								//按鈕寫入string
 		{
 			for (int j = 0; j < button[i].size(); j++)
 				output[i + 6][1 + j] = button[i][j];
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
 			output[button_control + 6][0] = '-';
-		if (temrank.name != "\0") // 玩家排名寫入string
+		if (temrank.name != "\0")											//玩家排名寫入string
 		{
 			string s = "你的分數:";
 			s += to_string(temrank.score);
@@ -304,7 +301,7 @@ private:
 				output[2][8 + i] = s[i];
 			}
 		}
-		for (int i = 1; i <= min(int(rank.size()), 6); i++) // 排名資料寫入string
+		for (int i = 1; i <= min(int(rank.size()), 6); i++)                  // 排名資料寫入string
 		{
 
 			for (int j = 0; j < to_string(i + next).size(); j++)
@@ -318,7 +315,7 @@ private:
 			}
 			for (int j = 0; j < rank[i - 1 + next].mode.size(); j++)
 			{
-				output[i + 3][18 + j] = rank[i - 1 + next].mode[j];
+				output[i + 3][18 + j] = rank[i - 1 + next].mode[j];	
 			}
 			for (int j = 0; j < rank[i - 1 + next].name.size(); j++)
 			{
@@ -326,15 +323,17 @@ private:
 			}
 		}
 
-		for (int i = 0; i < 11; i++) // 輸出
+
+
+
+		for (int i = 0; i < 11; i++)                    //輸出
 		{
 			for (int j = 0; j < output[i].size(); j++)
 			{
-				if (i == 3 && j > 7 && j < 35)
-				{
+				if (i==3 && j > 7 && j<35) {
 					SetColor(112);
 				}
-				else if (4 == i + next && j > 7 && i > 3 && i < 10)
+				else if (4 == i + next && j > 7 && i > 3 && i < 10 )
 				{
 					SetColor(236);
 				}

@@ -23,8 +23,7 @@ protected:
 	int mousex;
 	int mousey;
 	int mousey_control = 0;
-	void resetmousesit()
-	{
+	void resetmousesit() {
 		POINT mouse;
 		GetCursorPos(&mouse);
 		mousex = mouse.x;

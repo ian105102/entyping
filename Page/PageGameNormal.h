@@ -62,9 +62,9 @@ public:
 					SetWindowsSize(37, 10);
 					Print();
 					int clocktime = clock();
-					while (clock() - clocktime <= 500 && keyin != 13) // 0.5秒後刷新螢幕
+					while (clock() - clocktime <= 500 && keyin != 13)       //0.5秒後刷新螢幕
 					{
-						if (_kbhit()) // 如果輸入
+						if (_kbhit())                                       //如果輸入
 						{
 							keyin = _getch();
 							if (keyin == 27)
@@ -75,24 +75,22 @@ public:
 							{
 								Cheack(keyin);
 							}
-							if (sleep == 1)
-							{
-								if (Stop(sleep))
-								{
+							if (sleep == 1) {
+								if (Stop(sleep)){
 									return 0;
 								}
 							}
-
+								
 							sleep = 0;
 							clocktime = clock();
 						}
 					}
 				}
-				keyin = 0; // 完成一次輸入計分
+				keyin = 0;                              //完成一次輸入計分
 				GameScore();
 			}
 		}
-		gamenormal_score -= ((clock() - start_time) / 3000); // 扣出時間
+		gamenormal_score -= ((clock() - start_time) / 3000);//扣出時間
 		return 5;
 	}
 
@@ -171,6 +169,7 @@ private:
 				return 1;
 			}
 		}
+
 	}
 	void GameScore()
 	{
