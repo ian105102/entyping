@@ -106,7 +106,8 @@ public:
 			if (_kbhit())
 			{
 				int keyin = _getch();
-				if (keyin == 224) {
+				if (keyin == 224)
+				{
 					keyin = _getch();
 				}
 				mousey_control = 0;
@@ -116,7 +117,6 @@ public:
 				{
 					button_control = 0;
 					View(button, button_control);
-
 				}
 				else
 				{
@@ -179,7 +179,7 @@ private:
 	void View(vector<string> button, int button_control)
 	{
 		gotoxy(0, 0);
-		string output[11] =                                           //ªì©l­È
+		string output[11] = // ªì©l­È
 			{
 				{"------------------------------------"},
 				{"                                    "},

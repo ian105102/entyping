@@ -23,7 +23,6 @@ public:
 		button.push_back("回首頁");
 		int page = 0;
 
-		
 		ifstream MyFile;
 		MyFile.open("data/description.txt");
 		if (!MyFile.is_open())
@@ -38,7 +37,7 @@ public:
 		int j = 0;
 		while (getline(MyFile, line))
 		{
-			if (i < 12)   //一共有12行
+			if (i < 12) // 一共有12行
 			{
 				output[i][j] = line;
 				i++;
@@ -47,19 +46,12 @@ public:
 			{
 				i = 0;
 				j++;
-				output[i][j] = line;   //看有幾頁
+				output[i][j] = line; // 看有幾頁
 				i++;
 			}
 		}
 		page_num = j;
 		MyFile.close();
-
-
-
-
-
-
-
 
 		View(button, button_control, page, game_stage, output);
 		tem_mousex = mousex;
@@ -121,7 +113,8 @@ public:
 			if (_kbhit())
 			{
 				int keyin = _getch();
-				if (keyin == 224) {
+				if (keyin == 224)
+				{
 					keyin = _getch();
 				}
 				mousey_control = 0;
@@ -131,7 +124,6 @@ public:
 				{
 					button_control = 0;
 					View(button, button_control, page, game_stage, output);
-
 				}
 				else
 				{
@@ -180,24 +172,24 @@ public:
 private:
 	void View(vector<string> button, int button_control, int page, int game_stage, string output[15][20])
 	{
-		gotoxy(0, 0);                                      
-		for (int i = 0; i < button.size(); i++)                               //將資料寫入陣列中
+		gotoxy(0, 0);
+		for (int i = 0; i < button.size(); i++) // 將資料寫入陣列中
 		{
-			output[ 8+i][page][3] = ' ';
+			output[8 + i][page][3] = ' ';
 			for (int j = 0; j < button[i].size(); j++)
 				output[i + 8][page][4 + j] = button[i][j];
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
 			output[button_control + 8][page][3] = '-';
 
-
-
-		for (int i = 0; i < 12; i++)    //總輸出
+		for (int i = 0; i < 12; i++) // 總輸出
 		{
-			if (i==1) {
+			if (i == 1)
+			{
 				SetColor(14);
 			}
-			else {
+			else
+			{
 				SetColor(7);
 			}
 			cout << output[i][page] << endl;

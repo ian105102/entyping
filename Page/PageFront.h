@@ -84,24 +84,22 @@ public:
 				}
 			}
 
-
-			
 			if (_kbhit())
 			{
 				int keyin = _getch();
-				if (keyin==224){
+				if (keyin == 224)
+				{
 					keyin = _getch();
 				}
 				mousey_control = 0;
 				tem_mousex = mousex;
 				tem_mousey = mousey;
-				if (button_control == -1 && keyin!=13)
+				if (button_control == -1 && keyin != 13)
 				{
 					button_control = 0;
 					View(button, button_control);
-					
 				}
-				else 
+				else
 				{
 					if ((keyin == 83 || keyin == 115 || keyin == 80) && button.size() != NULL)
 					{
@@ -139,9 +137,6 @@ public:
 					}
 				}
 			}
-
-
-
 		}
 		return 0;
 	}
@@ -152,18 +147,18 @@ private:
 		gotoxy(0, 0);
 
 		string output[10] =
-		{
-			{"------------------------------------"},
-			{"                                   "},
-			{"            英文打字練習            "},
-			{"               +-----+             "},
-			{"              /|  a  | +-----+     "},
-			{"             + |     |/|  s  |     "},
-			{"             | /-----/||     |     "},
-			{"             |/     / |/-----/     "},
-			{"             +-----+  +-----+      "},
-			{"------------------------------------"},
-		};
+			{
+				{"------------------------------------"},
+				{"                                   "},
+				{"            英文打字練習            "},
+				{"               +-----+             "},
+				{"              /|  a  | +-----+     "},
+				{"             + |     |/|  s  |     "},
+				{"             | /-----/||     |     "},
+				{"             |/     / |/-----/     "},
+				{"             +-----+  +-----+      "},
+				{"------------------------------------"},
+			};
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)

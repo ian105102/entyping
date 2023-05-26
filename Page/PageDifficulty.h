@@ -85,7 +85,8 @@ public:
 			if (_kbhit())
 			{
 				int keyin = _getch();
-				if (keyin == 224) {
+				if (keyin == 224)
+				{
 					keyin = _getch();
 				}
 				mousey_control = 0;
@@ -173,25 +174,32 @@ private:
 			output[button_control + 5][15] = '-';
 		for (int i = 0; i < 11; i++)
 		{
-			if (i==2) {
+			if (i == 2)
+			{
 				SetColor(14);
 			}
-			else if (i == 4) {
+			else if (i == 4)
+			{
 				SetColor(7);
 			}
-			else if (i==5) {
+			else if (i == 5)
+			{
 				SetColor(10);
 			}
-			else if (i==6) {
+			else if (i == 6)
+			{
 				SetColor(14);
 			}
-			else if (i == 7) {
+			else if (i == 7)
+			{
 				SetColor(12);
 			}
-			else if (i == 9) {
+			else if (i == 9)
+			{
 				SetColor(15);
 			}
-			else {
+			else
+			{
 				SetColor(7);
 			}
 			cout << output[i] << "\n";
