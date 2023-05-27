@@ -38,7 +38,7 @@ public:
 			Print(countdown_sec);
 			while ((clock() - start) < 1000)
 			{
-				SetWindowsSize(36, 11);
+				SetWindowsSize(35, 11);
 				int ch;
 				if (_kbhit())
 				{

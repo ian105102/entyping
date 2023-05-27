@@ -14,7 +14,7 @@ public:
 	}
 	int GameStage(int gamestage)
 	{
-		SetWindowsSize(37, 11);
+		SetWindowsSize(35, 11);
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
 		int button_control = 0;
@@ -29,7 +29,7 @@ public:
 		View(button, button_control);
 		while (gamestage == 2)
 		{
-			SetWindowsSize(37, 11);
+			SetWindowsSize(35, 11);
 			if (mousey != tem_mousey && mousex != tem_mousex)
 			{
 				mousey_control = 1;
@@ -183,12 +183,12 @@ private:
 			{
 				{"------------------------------------"},
 				{"                                    "},
-				{"               ¹Cª±¼Ò¦¡              "},
+				{"               ¹Cª±¼Ò¦¡             "},
+				{"                                    "},
 				{"              ¢z¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢{"},
 				{"              ¢x               ùþ    ¢x"},
-				{"              ¢x               ùþ    ¢x"},
 				{"              ¢x  ùþ ùþ   ùþùþ   ùþùþùþ ùþùþùþ¢x"},
-				{"              ¢x ùþ ùþ ùþ ùþ  ùþ ùþ  ùþ ùþùþùþ¢x"},
+				{"              ¢x ùþ ùþ ùþ ùþ  ùþ ùþ  ùþ ùþ-¢}¢x"},
 				{"              ¢x ùþ ùþ ùþ  ùþùþ   ùþùþùþ ùþùþùþ¢x"},
 				{"              ¢|¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢}"},
 				{"------------------------------------"},
@@ -202,7 +202,46 @@ private:
 			output[button_control + 4][1] = '-';
 		for (int i = 0; i < 11; i++)
 		{
-			cout << output[i] << "\n";
+			for (int j = 0; j < output[i].size(); j++)
+			{
+				if (j > 14 && i > 3 && i < 10)
+				{
+					if (button_control == 0)
+					{
+						SetColor(9);
+					}
+					if (button_control == 1)
+					{
+						SetColor(10);
+					}
+					if (button_control == 2)
+					{
+						SetColor(11);
+					}
+					if (button_control == 3)
+					{
+						SetColor(12);
+					}
+					if (button_control == 4)
+					{
+						SetColor(13);
+					}
+					if (button_control == 5)
+					{
+						SetColor(7);
+					}
+				}
+				else if (i == 2)
+				{
+					SetColor(31);
+				}
+				else
+				{
+					SetColor(7);
+				}
+				cout << output[i][j];
+			}
+			cout << endl;
 		}
 		return;
 	}

@@ -32,7 +32,7 @@ public:
 		HDC hdc = GetDC(NULL);
 		double page_angle = ((rand() % 50) + 20) * 3.1415926 / 180;
 		double page_vx = 3 * (game_difficult + 1) * cos(page_angle), page_vy = 3 * (game_difficult + 1) * sin(page_angle), page_x = 450, page_y = 200;
-		SetWindowsSize(37, 11);
+		SetWindowsSize(35, 11);
 
 		while (map_char[33] == '\0' && gamefall_score > -998 && gamefall_score < 998)
 		{

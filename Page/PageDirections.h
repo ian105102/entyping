@@ -10,7 +10,7 @@ class PageDirections : NormalPage
 public:
 	int GameStage(int game_stage)
 	{
-		SetWindowsSize(37, 11);
+		SetWindowsSize(35, 12);
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
 		int button_control = 0;
@@ -58,7 +58,7 @@ public:
 		tem_mousey = mousey;
 		while (game_stage == 1)
 		{
-			SetWindowsSize(37, 13);
+			SetWindowsSize(35, 12);
 			if (mousey != tem_mousey && mousex != tem_mousex)
 			{
 				mousey_control = 1;

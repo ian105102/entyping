@@ -10,7 +10,7 @@ class PageFront : NormalPage
 public:
 	int GameStage(int gamestage)
 	{
-		SetWindowsSize(37, 11);
+		SetWindowsSize(35, 11);
 		vector<string> button;
 		int button_control = 0;
 		button.push_back("開始");
@@ -24,35 +24,35 @@ public:
 		int i = 0;
 		while (gamestage == 0)
 		{
-			SetWindowsSize(37, 11);
+			SetWindowsSize(35, 11);
 			if (mousey != tem_mousey && mousex != tem_mousex)
 			{
 				mousey_control = 1;
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 370 && mousey < 395 && button_control != 0)
+				if (mousey > 400 && mousey < 425 && button_control != 0)
 				{
 					button_control = 0;
 					tem_mousex = mousex;
 					tem_mousey = mousey;
 					View(button, button_control);
 				}
-				if (mousey > 395 && mousey < 420 && button_control != 1)
+				if (mousey > 425 && mousey < 450 && button_control != 1)
 				{
 					button_control = 1;
 					tem_mousex = mousex;
 					tem_mousey = mousey;
 					View(button, button_control);
 				}
-				if (mousey > 420 && mousey < 445 && button_control != 2)
+				if (mousey > 460 && mousey < 485 && button_control != 2)
 				{
 					button_control = 2;
 					tem_mousex = mousex;
 					tem_mousey = mousey;
 					View(button, button_control);
 				}
-				if (mousey > 470 && mousey < 500 && button_control != 3)
+				if (mousey > 485 && mousey < 510 && button_control != 3)
 				{
 					button_control = 3;
 					tem_mousex = mousex;
@@ -146,11 +146,12 @@ private:
 	{
 		gotoxy(0, 0);
 
-		string output[10] =
+		string output[11] =
 			{
 				{"------------------------------------"},
 				{"                                   "},
-				{"            英文打字練習             "},
+				{"            英文打字練習            "},
+				{"                                   "},
 				{"               +-----+  click!     "},
 				{"              /|  a  | +-----+     "},
 				{"             + |     |/|  s  |     "},
@@ -162,14 +163,45 @@ private:
 		for (int i = 0; i < button.size(); i++)
 		{
 			for (int j = 0; j < button[i].size(); j++)
-				output[i + 5][2 + j] = button[i][j];
+				output[i + 6][2 + j] = button[i][j];
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
-			output[button_control + 5][1] = '-';
-		for (int i = 0; i < 10; i++)
+			output[button_control + 6][1] = '-';
+		for (int i = 0; i < 11; i++)
 		{
-			SetColor(7);
-			cout << output[i] << "\n";
+
+			for (int j = 0; j < output[i].size(); j++)
+			{
+				if (j > 8 && i > 3 && i < 10)
+				{
+					if (button_control == 0)
+					{
+						SetColor(9);
+					}
+					if (button_control == 1)
+					{
+						SetColor(10);
+					}
+					if (button_control == 2)
+					{
+						SetColor(11);
+					}
+					if (button_control == 3)
+					{
+						SetColor(7);
+					}
+				}
+				else if (i == 2)
+				{
+					SetColor(31);
+				}
+				else
+				{
+					SetColor(7);
+				}
+				cout << output[i][j];
+			}
+			cout << endl;
 		}
 	}
 };

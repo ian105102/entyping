@@ -15,7 +15,7 @@ public:
 	}
 	int GameStage(int game_stage, int mode)
 	{
-		SetWindowsSize(37, 11);
+		SetWindowsSize(35, 11);
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
 		int button_control = 0;
@@ -28,7 +28,7 @@ public:
 		View(button, button_control, mode);
 		while (game_stage == 3)
 		{
-			SetWindowsSize(37, 10);
+			SetWindowsSize(35, 11);
 			if (mousey != tem_mousey && mousex != tem_mousex)
 			{
 				mousey_control = 1;
@@ -153,7 +153,7 @@ private:
 			{
 				{"------------------------------------"},
 				{"                                    "},
-				{"               難度選擇              "},
+				{"               難度選擇             "},
 				{"                                    "},
 				{"                                    "},
 				{"                                    "},
@@ -176,7 +176,7 @@ private:
 		{
 			if (i == 2)
 			{
-				SetColor(14);
+				SetColor(31);
 			}
 			else if (i == 4)
 			{

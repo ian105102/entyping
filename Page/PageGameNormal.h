@@ -59,7 +59,7 @@ public:
 				Print();
 				while (keyin != 13)
 				{
-					SetWindowsSize(37, 10);
+					SetWindowsSize(35, 10);
 					Print();
 					int clocktime = clock();
 					while (clock() - clocktime <= 500 && keyin != 13) // 0.5¬í«á¨ê·s¿Ã¹õ

@@ -12,13 +12,13 @@ class Pagescoring : NormalPage
 public:
 	int GameStage(int game_stage, int player_score, int player_mode, int gmae_difficulty, bool score_mode)
 	{
-		SetWindowsSize(37, 11);
+		SetWindowsSize(35, 12);
 		vector<ranklist> rank = InputRankFile();
 		vector<string> button;
 		button.push_back("上一項");
 		button.push_back("下一項");
 		button.push_back("回主頁");
-		button.push_back("離開");
+
 		int tem_mousex = mousex;
 		int tem_mousey = mousey;
 		int button_control = 0;
@@ -32,9 +32,10 @@ public:
 			"\0",
 		};
 		temrank.score = player_score;
-		View(button, next, button_control, rank_sit, rank, temrank);
 		if (score_mode) // 處理排名資料
 		{
+			button.push_back("離開");
+			View(button, next, button_control, rank_sit, rank, temrank);
 			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 			switch (player_mode)
 			{
@@ -61,9 +62,9 @@ public:
 			{
 				cout << "輸入名稱: ";
 				getline(cin, temrank.name);
-				if (temrank.name.size() > 7)
+				if (temrank.name.size() > 9)
 				{
-					cout << "最多七個字" << endl;
+					cout << "最多九個字" << endl;
 					temrank.name = "\0";
 					continue;
 				}
@@ -88,7 +89,7 @@ public:
 			int i = 0;
 			while (i < rank.size() && player_score <= rank[i].score)
 			{
-				SetWindowsSize(37, 11);
+				SetWindowsSize(35, 12);
 				i++;
 			}
 			rank.insert(rank.begin() + i, temrank);
@@ -104,7 +105,7 @@ public:
 					PageMove(450 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2, 200 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2);
 				}
 			}
-			SetWindowsSize(37, 11);
+			SetWindowsSize(35, 12);
 			system("cls");
 			if (rank_sit - 1 < 6)
 			{
@@ -131,31 +132,32 @@ public:
 			}
 			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 		}
+		View(button, next, button_control, rank_sit, rank, temrank);
 		while (game_stage == 5)
 		{
-			SetWindowsSize(37, 11);
+			SetWindowsSize(35, 12);
 			if (mousey != tem_mousey && mousex != tem_mousex)
 			{
 				mousey_control = 1;
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 405 && mousey < 430 && button_control != 0)
+				if (mousey > 430 && mousey < 455 && button_control != 0)
 				{
 					button_control = 0;
 					View(button, next, button_control, rank_sit, rank, temrank);
 				}
-				if (mousey > 430 && mousey < 455 && button_control != 1)
+				if (mousey > 455 && mousey < 480 && button_control != 1)
 				{
 					button_control = 1;
 					View(button, next, button_control, rank_sit, rank, temrank);
 				}
-				if (mousey > 455 && mousey < 480 && button_control != 2)
+				if (mousey > 480 && mousey < 505 && button_control != 2)
 				{
 					button_control = 2;
 					View(button, next, button_control, rank_sit, rank, temrank);
 				}
-				if (mousey > 480 && mousey < 505 && button_control != 3)
+				if (mousey > 505 && mousey < 530 && button_control != 3)
 				{
 					button_control = 3;
 					View(button, next, button_control, rank_sit, rank, temrank);
@@ -292,26 +294,27 @@ private:
 	void View(vector<string> button, int next, int button_control, int rank_sit, vector<ranklist> rank, ranklist temrank)
 	{
 		gotoxy(0, 0);
-		string output[11]{
+		string output[12]{
 			{"------------------------------------"},
-			{"               排行榜               "},
-			{"                                   "},
+			{"                                    "},
+			{"               排行榜                "},
+			{"                                    "},
 			{"        排名 分數 模式難度 名稱       "},
-			{"                                   "},
-			{"                                   "},
-			{"                                   "},
-			{"                                   "},
-			{"                                   "},
-			{"                                   "},
+			{"                                    "},
+			{"                                    "},
+			{"                                    "},
+			{"                                    "},
+			{"                                    "},
+			{"                                    "},
 			{"------------------------------------"},
 		};
 		for (int i = 0; i < button.size(); i++) // 按鈕寫入string
 		{
 			for (int j = 0; j < button[i].size(); j++)
-				output[i + 6][1 + j] = button[i][j];
+				output[i + 7][1 + j] = button[i][j];
 		}
 		if (button.size() != 0 && button_control >= 0 && button_control < button.size())
-			output[button_control + 6][0] = '-';
+			output[button_control + 7][0] = '-';
 		if (temrank.name != "\0") // 玩家排名寫入string
 		{
 			string s = "你的分數:";
@@ -320,7 +323,7 @@ private:
 			s += to_string(rank_sit);
 			for (int i = 0; i < s.size(); i++)
 			{
-				output[2][8 + i] = s[i];
+				output[3][8 + i] = s[i];
 			}
 		}
 		for (int i = 1; i <= min(int(rank.size()), 6); i++) // 排名資料寫入string
@@ -328,44 +331,52 @@ private:
 
 			for (int j = 0; j < to_string(i + next).size(); j++)
 			{
-				output[i + 3][8 + j] = to_string(i + next)[j];
-				output[i + 3][9 + j] = ',';
+				output[i + 4][8 + j] = to_string(i + next)[j];
+				output[i + 4][9 + j] = ',';
 			}
 			for (int j = 0; j < to_string(rank[i - 1 + next].score).size(); j++)
 			{
-				output[i + 3][13 + j] = to_string(rank[i - 1 + next].score)[j];
+				output[i + 4][13 + j] = to_string(rank[i - 1 + next].score)[j];
 			}
 			for (int j = 0; j < rank[i - 1 + next].mode.size(); j++)
 			{
-				output[i + 3][18 + j] = rank[i - 1 + next].mode[j];
+				output[i + 4][18 + j] = rank[i - 1 + next].mode[j];
 			}
 			for (int j = 0; j < rank[i - 1 + next].name.size(); j++)
 			{
-				output[i + 3][27 + j] = rank[i - 1 + next].name[j];
+				output[i + 4][27 + j] = rank[i - 1 + next].name[j];
 			}
 		}
 
-		for (int i = 0; i < 11; i++) // 輸出
+		for (int i = 0; i < 12; i++) // 輸出
 		{
 			for (int j = 0; j < output[i].size(); j++)
 			{
-				if (i == 3 && j > 7 && j < 35)
+				if (i == 4 && j > 7 && j < 36)
 				{
 					SetColor(112);
 				}
-				else if (4 == i + next && j > 7 && i > 3 && i < 10 && rank.size() > 0)
+				else if (i == 2)
+				{
+					SetColor(31);
+				}
+				else if (i == 3 && temrank.name != "\0")
+				{
+					SetColor(9);
+				}
+				else if (5 == i + next && j > 7 && i > 4 && i < 11 && rank.size() > 0)
 				{
 					SetColor(236);
 				}
-				else if (5 == i + next && j > 7 && i > 3 && i < 10 && rank.size() > 1)
+				else if (6 == i + next && j > 7 && i > 4 && i < 11 && rank.size() > 1)
 				{
 					SetColor(156);
 				}
-				else if (6 == i + next && j > 7 && i > 3 && i < 10 && rank.size() > 2)
+				else if (7 == i + next && j > 7 && i > 4 && i < 11 && rank.size() > 2)
 				{
 					SetColor(172);
 				}
-				else if (rank_sit + 3 == i + next && j > 7 && i > 3 && i < 10)
+				else if (rank_sit + 4 == i + next && j > 7 && i > 4 && i < 11)
 				{
 					SetColor(9);
 				}
