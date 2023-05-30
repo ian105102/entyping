@@ -29,7 +29,6 @@ public:
 		double speed = 1;
 		int clock_time = clock();
 		int renew_time = clock();
-		HDC hdc = GetDC(NULL);
 		double page_angle = ((rand() % 50) + 20) * 3.1415926 / 180;
 		double page_vx = 3 * (game_difficult + 1) * cos(page_angle), page_vy = 3 * (game_difficult + 1) * sin(page_angle), page_x = 450, page_y = 200;
 		SetWindowsSize(35, 11);
