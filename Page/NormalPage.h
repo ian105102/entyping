@@ -49,6 +49,7 @@ protected:
 			int tem_time = clock();
 			while (clock() - tem_time < 20)
 			{
+
 			}
 		}
 		SetWindowPos(GetConsoleWindow(), HWND_TOP, 450, 200, 0, 0, SWP_NOSIZE);
@@ -91,6 +92,8 @@ protected:
 		int renew_time = clock();
 		while (page_y < window_cy)
 		{
+			if (_kbhit())
+				_getch();
 			if (clock() - renew_time >= 30)
 			{
 				renew_time = clock();
