@@ -28,7 +28,7 @@ int main()
 {
 	PageFront First;
 	PageDirections Second;
-	PageMode Thirdt
+	PageMode Third;
 	PageDifficulty Fourth;
 	Pagescoring Sixth;
 	PageGameNormal FifthNormal;
