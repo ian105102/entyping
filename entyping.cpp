@@ -1,4 +1,4 @@
-// ¦rÅé¤j¤p:28 ±Nµøµ¡ªº§Ö³t½s¿è¼Ò¦¡Ãö±¼
+// ï¿½rï¿½ï¿½jï¿½p:28 ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö³tï¿½sï¿½ï¿½Ò¦ï¿½ï¿½ï¿½ï¿½ï¿½
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
