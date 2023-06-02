@@ -288,7 +288,7 @@ private:
 			cout << gamefall_map[i] << endl;
 		}
 		SetColor(7);
-		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << endl;
+		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 <<"     "<< endl;
 	}
 };
 #endif
