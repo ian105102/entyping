@@ -197,7 +197,7 @@ private:
 		cout << "                                  ¢iùþ" << endl;
 		cout << "                                  ùþ¢i" << endl;
 		cout << "------------------------------------" << endl;
-		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << endl;
+		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 <<"         " << endl;
 		SetColor(7);
 		while (sleep == 1)
 		{
@@ -288,7 +288,7 @@ private:
 			cout << gamefall_map[i] << endl;
 		}
 		SetColor(7);
-		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << endl;
+		cout << "score: " << gamefall_score << "    time: " << (clock() - start_time) / 1000 << "         " << endl;
 	}
 };
 #endif

@@ -43,13 +43,14 @@ protected:
 	}
 	void PageShake()
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			SetWindowPos(GetConsoleWindow(), HWND_TOP, 450 + rand() % 50 - 25, 200 + rand() % 50 - 25, 0, 0, SWP_NOSIZE);
 			int tem_time = clock();
 			while (clock() - tem_time < 20)
 			{
-
+				if (_kbhit())
+					_getch();
 			}
 		}
 		SetWindowPos(GetConsoleWindow(), HWND_TOP, 450, 200, 0, 0, SWP_NOSIZE);
