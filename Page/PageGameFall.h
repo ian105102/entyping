@@ -22,6 +22,7 @@ public:
 	int GameStage(int game_stage, int game_difficult)
 	{
 		PlaySound(NULL, NULL, SND_NODEFAULT);
+		SetWindowsSize(35, 10);
 		CountDown();
 		ResetGameFall();
 		gamefall_score = 0;
@@ -30,7 +31,7 @@ public:
 		int clock_time = clock();
 		int renew_time = clock();
 		double page_angle = ((rand() % 50) + 20) * 3.1415926 / 180;
-		double page_vx = 3 * (game_difficult + 1) * cos(page_angle), page_vy = 3 * (game_difficult + 1) * sin(page_angle), page_x = 450, page_y = 200;
+		double page_vx = 3 * (game_difficult + 1) * cos(page_angle), page_vy = 3 * (game_difficult + 1) * sin(page_angle), page_x = interface_cx, page_y = interface_cy;
 		SetWindowsSize(35, 11);
 
 		while (map_char[33] == '\0' && gamefall_score > -998 && gamefall_score < 998)
@@ -141,6 +142,7 @@ private:
 		SetColor(7);
 		while (clock() - time < 1000)
 		{
+			SetWindowsSize(35, 11);
 		}
 		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		gotoxy(0, 0);
@@ -158,6 +160,7 @@ private:
 		SetColor(7);
 		while (clock() - time < 2000)
 		{
+			SetWindowsSize(35, 11);
 		}
 		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		gotoxy(0, 0);
@@ -175,6 +178,7 @@ private:
 		SetColor(7);
 		while (clock() - time < 3000)
 		{
+			SetWindowsSize(35, 11);
 			if (_kbhit())
 				_getch();
 		}
@@ -186,7 +190,6 @@ private:
 		system("CLS");
 		int timeresit = clock();
 		SetColor(9);
-		gotoxy(0, 0);
 		cout << "------------------------------------" << endl;
 		cout << "                                  ¢iùþ" << endl;
 		cout << "                                  ùþ¢i" << endl;
@@ -201,21 +204,24 @@ private:
 		SetColor(7);
 		while (sleep == 1)
 		{
-			int ch = _getch();
-			if (ch == 27)
+			if (_kbhit())
 			{
-				start_time += (clock() - timeresit);
-				system("CLS");
-				Print();
-				sleep = 0;
-				return 0;
-			}
-			if (ch == 8)
-			{
-				start_time += (clock() - timeresit);
-				system("CLS");
-				sleep = 0;
-				return 1;
+				int ch = _getch();
+				if (ch == 27)
+				{
+					start_time += (clock() - timeresit);
+					system("CLS");
+					Print();
+					sleep = 0;
+					return 0;
+				}
+				if (ch == 8)
+				{
+					start_time += (clock() - timeresit);
+					system("CLS");
+					sleep = 0;
+					return 1;
+				}
 			}
 		}
 		return 0;

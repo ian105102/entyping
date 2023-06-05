@@ -59,11 +59,11 @@ public:
 				Print();
 				while (keyin != 13)
 				{
-					SetWindowsSize(35, 10);
 					Print();
 					int clocktime = clock();
 					while (clock() - clocktime <= 500 && keyin != 13) // 0.5秒後刷新螢幕
 					{
+						SetWindowsSize(35, 10);
 						if (_kbhit()) // 如果輸入
 						{
 							keyin = _getch();
@@ -146,7 +146,7 @@ private:
 		cout << "------------------------------------" << endl;
 		cout << "                                    " << endl;
 		cout << "                                    " << endl;
-		cout << "                stop                " << endl;
+		cout << "               stop                 " << endl;
 		cout << "         再按一次ESC可以繼續!         " << endl;
 		cout << "        按Backspace可以回首頁        " << endl;
 		cout << "score: " << gamenormal_score - ((clock() - start_time) / 3000) << "  time: " << (clock() - start_time) / 1000 << endl;
@@ -154,23 +154,28 @@ private:
 		SetColor(7);
 		while (sleep == 1)
 		{
-			int ch = _getch();
-			if (ch == 27)
+			SetWindowsSize(35, 10);
+			if (_kbhit())
 			{
-				sleep = 0;
-				start_time += (clock() - timeresit);
-				system("CLS");
-				Print();
-				return 0;
-			}
-			if (ch == 8)
-			{
-				sleep = 0;
-				start_time += (clock() - timeresit);
-				system("CLS");
-				return 1;
+				int ch = _getch();
+				if (ch == 27)
+				{
+					sleep = 0;
+					start_time += (clock() - timeresit);
+					system("CLS");
+					Print();
+					return 0;
+				}
+				if (ch == 8)
+				{
+					sleep = 0;
+					start_time += (clock() - timeresit);
+					system("CLS");
+					return 1;
+				}
 			}
 		}
+		return 1;
 	}
 	void GameScore()
 	{

@@ -22,6 +22,8 @@ class NormalPage
 protected:
 	int mousex;
 	int mousey;
+	int interface_cx = ((GetSystemMetrics(SM_CXSCREEN)) - 585) / 2;
+	int interface_cy = ((GetSystemMetrics(SM_CYSCREEN)) - 375) / 2;
 	int mousey_control = 0;
 	void resetmousesit()
 	{
@@ -36,7 +38,7 @@ protected:
 		GetCursorPos(&mouse);
 		mousex = mouse.x;
 		mousey = mouse.y;
-		SetWindowPos(GetConsoleWindow(), HWND_TOP, 450, 200, 0, 0, SWP_NOSIZE);
+		SetWindowPos(GetConsoleWindow(), HWND_TOP, interface_cx, interface_cy, 0, 0, SWP_NOSIZE);
 		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 		SMALL_RECT rc = {0, 0, w, h};
 		SetConsoleWindowInfo(hOut, true, &rc);
@@ -45,7 +47,7 @@ protected:
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			SetWindowPos(GetConsoleWindow(), HWND_TOP, 450 + rand() % 50 - 25, 200 + rand() % 50 - 25, 0, 0, SWP_NOSIZE);
+			SetWindowPos(GetConsoleWindow(), HWND_TOP, interface_cx + rand() % 50 - 25, interface_cy + rand() % 50 - 25, 0, 0, SWP_NOSIZE);
 			int tem_time = clock();
 			while (clock() - tem_time < 20)
 			{
@@ -53,7 +55,7 @@ protected:
 					_getch();
 			}
 		}
-		SetWindowPos(GetConsoleWindow(), HWND_TOP, 450, 200, 0, 0, SWP_NOSIZE);
+		SetWindowPos(GetConsoleWindow(), HWND_TOP, interface_cx, interface_cy, 0, 0, SWP_NOSIZE);
 	}
 	void PageMove(int x, int y)
 	{
@@ -67,7 +69,7 @@ protected:
 			int x = cursorPos.x;
 			int y = cursorPos.y;
 			HDC hdc = GetDC(NULL);
-			cout << x << " " << y << " " << GetDeviceCaps(hdc, DESKTOPHORZRES) << " " << GetDeviceCaps(hdc, DESKTOPVERTRES);
+			cout << mousex - interface_cx << " " << mousey - interface_cy << " " << GetSystemMetrics(SM_CXSCREEN) << " " << GetSystemMetrics(SM_CYSCREEN);
 		}
 	}
 	void gotoxy(int x, int y)

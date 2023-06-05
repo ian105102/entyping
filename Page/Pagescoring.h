@@ -60,6 +60,7 @@ public:
 			}
 			do
 			{
+				SetWindowsSize(35, 12);
 				cout << "輸入名稱: ";
 				getline(cin, temrank.name);
 				if (temrank.name.size() > 9)
@@ -102,7 +103,7 @@ public:
 			{
 				if ((clock() - music_time) % 30 == 0)
 				{
-					PageMove(450 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2, 200 + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2);
+					PageMove(interface_cx + (rand() % (10 + (clock() - music_time) / 50)) - (10 + (clock() - music_time) / 50) / 2, interface_cy + (rand() % (5 + (clock() - music_time) / 100)) - (5 + (clock() - music_time) / 100) / 2);
 				}
 			}
 			SetWindowsSize(35, 12);
@@ -124,11 +125,10 @@ public:
 			music_time = clock();
 			PlaySound(TEXT("musics/win.wav"), NULL, SND_ASYNC);
 			while (clock() - music_time < 5000)
+				SetWindowsSize(35, 12);
 			{ // 修正停止時依然可以累計輸入的問題
 				if (_kbhit())
-				{
 					_getch();
-				}
 			}
 			PlaySound(TEXT("musics/ghostfight.wav"), NULL, SND_ASYNC | SND_LOOP);
 		}
@@ -142,28 +142,16 @@ public:
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 430 && mousey < 455 && button_control != 0)
+				for (int i = 0; i < button.size(); i++)
 				{
-					button_control = 0;
-					View(button, next, button_control, rank_sit, rank, temrank);
-				}
-				if (mousey > 455 && mousey < 480 && button_control != 1)
-				{
-					button_control = 1;
-					View(button, next, button_control, rank_sit, rank, temrank);
-				}
-				if (mousey > 480 && mousey < 505 && button_control != 2)
-				{
-					button_control = 2;
-					View(button, next, button_control, rank_sit, rank, temrank);
-				}
-				if (mousey > 505 && mousey < 530 && button_control != 3)
-				{
-					button_control = 3;
-					View(button, next, button_control, rank_sit, rank, temrank);
+					if (mousey - interface_cy > 228 + (27 * i) && mousey - interface_cy < 228 + (27 * (i + 1)) && button_control != i)
+					{
+						button_control = i;
+						View(button, next, button_control, rank_sit, rank, temrank);
+					}
 				}
 			}
-			if (MOUSE_Click(VK_LBUTTON))
+			if (MOUSE_Click(VK_LBUTTON) && mousey - interface_cy > 30 && mousex - interface_cx > 0 && mousex - interface_cx < 585 && mousey - interface_cy < 405)
 			{
 				while (MOUSE_Click(VK_LBUTTON) == 1)
 				{
@@ -388,6 +376,7 @@ private:
 			}
 			cout << endl;
 		}
+		return;
 	}
 };
 #endif

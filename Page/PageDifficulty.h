@@ -35,28 +35,16 @@ public:
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 370 && mousey < 395 && button_control != 0)
+				for (int i = 0; i < button.size(); i++)
 				{
-					button_control = 0;
-					View(button, button_control, mode);
-				}
-				if (mousey > 395 && mousey < 420 && button_control != 1)
-				{
-					button_control = 1;
-					View(button, button_control, mode);
-				}
-				if (mousey > 420 && mousey < 450 && button_control != 2)
-				{
-					button_control = 2;
-					View(button, button_control, mode);
-				}
-				if (mousey > 450 && mousey < 480 && button_control != 3)
-				{
-					button_control = 3;
-					View(button, button_control, mode);
+					if (mousey - interface_cy > 174 + (27 * i) && mousey - interface_cy < 174 + (27 * (i + 1)) && button_control != i)
+					{
+						button_control = i;
+						View(button, button_control, mode);
+					}
 				}
 			}
-			if (MOUSE_Click(VK_LBUTTON))
+			if (MOUSE_Click(VK_LBUTTON) && mousey - interface_cy > 30 && mousex - interface_cx > 0 && mousex - interface_cx < 585 && mousey - interface_cy < 375)
 			{
 				while (MOUSE_Click(VK_LBUTTON) == 1)
 				{

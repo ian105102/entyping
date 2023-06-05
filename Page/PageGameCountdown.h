@@ -211,6 +211,7 @@ private:
 		SetColor(7);
 		while (clock() - time < 1000)
 		{
+			SetWindowsSize(35, 11);
 		}
 		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		gotoxy(0, 0);
@@ -228,6 +229,7 @@ private:
 		SetColor(7);
 		while (clock() - time < 2000)
 		{
+			SetWindowsSize(35, 11);
 		}
 		PlaySound(TEXT("musics/di.wav"), NULL, SND_ASYNC);
 		gotoxy(0, 0);
@@ -245,6 +247,7 @@ private:
 		SetColor(7);
 		while (clock() - time < 3000)
 		{
+			SetWindowsSize(35, 11);
 			if (_kbhit())
 				_getch();
 		}
@@ -256,7 +259,6 @@ private:
 		system("cls");
 		SetColor(9);
 		int stop_time = clock();
-		gotoxy(0, 0);
 		for (int i = 0; i < 10; i++)
 		{
 			SetColor(3);
@@ -266,6 +268,7 @@ private:
 		char ch;
 		while (sleep == 1)
 		{
+			SetWindowsSize(35, 11);
 			if (_kbhit())
 			{
 				ch = _getch();

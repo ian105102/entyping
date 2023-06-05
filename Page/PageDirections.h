@@ -65,29 +65,18 @@ public:
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 440 && mousey < 475 && button_control != 0)
+				for (int i = 0; i < button.size(); i++)
 				{
-					button_control = 0;
-					tem_mousex = mousex;
-					tem_mousey = mousey;
-					View(button, button_control, page, game_stage, output);
-				}
-				else if (mousey > 475 && mousey < 510 && button_control != 1)
-				{
-					button_control = 1;
-					tem_mousex = mousex;
-					tem_mousey = mousey;
-					View(button, button_control, page, game_stage, output);
-				}
-				else if (mousey > 510 && mousey < 545 && button_control != 2)
-				{
-					button_control = 2;
-					tem_mousex = mousex;
-					tem_mousey = mousey;
-					View(button, button_control, page, game_stage, output);
+					if (mousey - interface_cy > 260 + (27 * i) && mousey - interface_cy < 260 + (27 * (i + 1)) && button_control != i)
+					{
+						button_control = i;
+						tem_mousex = mousex;
+						tem_mousey = mousey;
+						View(button, button_control, page, game_stage, output);
+					}
 				}
 			}
-			if (MOUSE_Click(VK_LBUTTON))
+			if (MOUSE_Click(VK_LBUTTON) && mousey - interface_cy > 30 && mousex - interface_cx > 0 && mousex - interface_cx < 585 && mousey - interface_cy < 375)
 			{
 				while (MOUSE_Click(VK_LBUTTON) == 1)
 				{
@@ -194,6 +183,7 @@ private:
 			}
 			cout << output[i][page] << endl;
 		}
+		return;
 	}
 };
 #endif

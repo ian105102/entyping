@@ -36,39 +36,17 @@ public:
 			}
 			if (mousey_control == 1)
 			{
-				if (mousey > 345 && mousey < 370 && button_control != 0)
+				for (int i = 0; i < button.size(); i++)
 				{
-					button_control = 0;
-					View(button, button_control);
-				}
-				if (mousey > 370 && mousey < 395 && button_control != 1)
-				{
-					button_control = 1;
-					View(button, button_control);
-				}
-				if (mousey > 395 && mousey < 420 && button_control != 2)
-				{
-					button_control = 2;
-					View(button, button_control);
-				}
-				if (mousey > 420 && mousey < 445 && button_control != 3)
-				{
-					button_control = 3;
-					View(button, button_control);
-				}
-				if (mousey > 445 && mousey < 475 && button_control != 4)
-				{
-					button_control = 4;
-					View(button, button_control);
-				}
-				if (mousey > 475 && mousey < 500 && button_control != 5)
-				{
-					button_control = 5;
-					View(button, button_control);
+					if (mousey - interface_cy > 145 + (27 * i) && mousey - interface_cy < 145 + (27 * (i + 1)) && button_control != i)
+					{
+						button_control = i;
+						View(button, button_control);
+					}
 				}
 			}
 
-			if (MOUSE_Click(VK_LBUTTON))
+			if (MOUSE_Click(VK_LBUTTON) && mousey - interface_cy > 30 && mousex - interface_cx > 0 && mousex - interface_cx < 585 && mousey - interface_cy < 375)
 			{
 				while (MOUSE_Click(VK_LBUTTON) == 1)
 				{
@@ -243,6 +221,7 @@ private:
 			}
 			cout << endl;
 		}
+
 		return;
 	}
 };
