@@ -83,7 +83,7 @@ public:
 		cout << "                                  | " << endl;
 		cout << "------------------------------------" << endl;
 		SetColor(7);
-		end(450, 200);
+		end(interface_cx, interface_cy);
 		return 5;
 	}
 
